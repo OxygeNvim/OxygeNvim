@@ -1,7 +1,7 @@
 <h1 align="center">OxygeNvim</h1>
 <h2 align="center">Neovim configuration for general development</h2>
 
-# ⚠️ This project is in their development stage, Error's may occur!
+> ⚠️ This project is in their development stage, Error's may occur!
 
 <p align="center">
   <a href="https://github.com/OxygeNvim/OxygeNvim/wiki/Installation">Installation</a> |
