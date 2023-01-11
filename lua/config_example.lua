@@ -1,0 +1,82 @@
+local M = {}
+
+M.keymaps = {
+  leader = ' ',
+  custom = {
+    -- mode of keymap (i, n, v, t)
+    n = {
+      -- 1. The keybinding
+      -- 2. The command
+      -- 3. Description (optional)
+      ['<C-n>'] = { ':NvimTreeToggle<CR>', 'Toggle NvimTree' },
+    },
+  },
+}
+
+M.ui = {
+  theme = 'rosepine',
+  border = 'rounded', -- rounded, single, double
+  transparency = false,
+  statusline = {
+    separator_style = 'default', -- default | round | block | arrow
+  },
+}
+
+M.plugins = {
+  add = {
+    -- { 'foo/bar' }
+  },
+
+  remove = {
+    -- 'foobar.nvim'
+  },
+
+  config = {
+    ['nvim-treesitter'] = {
+      ensure_installed = {
+        'typescript',
+        'javascript',
+        'markdown',
+        'python',
+        'json',
+        'yaml',
+        'html',
+        'tsx',
+        'css',
+        'vue',
+        'lua',
+        'c',
+      },
+    },
+  },
+}
+
+M.lsp = {
+  enabled = true,
+  format_on_save = true,
+
+  -- Default servers
+  servers = {
+    clangd = {
+      -- use local clangd
+      install = false,
+    }, -- C, C++
+
+    sumneko_lua = {
+      config = {
+        -- lsp configuration options comes here
+      },
+    }, -- Lua
+
+    rust_analyzer = {}, -- Rust
+    jedi_language_server = {}, -- Python
+    tsserver = {}, -- JavaCcript, TypeScript
+    jsonls = {}, -- Json
+    bashls = {}, -- Sh, Bash
+    cssls = {}, -- CSS
+    vuels = {}, -- Vue
+    html = {}, -- HTML
+  },
+}
+
+return M

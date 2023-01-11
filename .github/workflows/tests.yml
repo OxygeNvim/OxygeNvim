@@ -1,0 +1,52 @@
+name: Tests
+
+on: push
+
+jobs:
+  test-linux:
+    name: Test Linux Ubuntu - Latest
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install CNvim
+        run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/cnvim) install -y
+
+      - name: Open neovim
+        run: nvim --headless -c "CnvimSync"
+
+      - name: Uninstall CNvim
+        run: bash <(curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/cnvim) uninstall -y
+
+  test-macos:
+    name: Test MacOS - Latest
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install CNvim
+        run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/cnvim) install -y
+
+      - name: Open neovim
+        run: nvim --headless -c "CnvimSync"
+
+      - name: Uninstall CNvim
+        run: bash <(curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/cnvim) uninstall -y
