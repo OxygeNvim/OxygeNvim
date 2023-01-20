@@ -9,11 +9,10 @@
 </p>
 
 <p align="center">
-  <img alt="Stargazers" src="https://img.shields.io/github/stars/OxygeNvim/OxygeNvim?style=for-the-badge&logo=starship" />
-  <img alt="Made with lua" src="https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua" />
-  <img alt="Minimum neovim version" src="https://img.shields.io/badge/Neovim-0.8.0+-blueviolet.svg?style=for-the-badge&logo=Neovim" />
-  <img alt="Tests" src="https://img.shields.io/github/workflow/status/OxygeNvim/OxygeNvim/Tests/main?style=for-the-badge&logo=github&label=Build" />
-  <img alt="Issues" src="https://img.shields.io/github/issues/OxygeNvim/OxygeNvim?style=for-the-badge&logo=gitbook" />
+  <img alt="Stargazers" src="https://img.shields.io/github/stars/OxygeNvim/OxygeNvim?style=for-the-badge" />
+  <img alt="Made with lua" src="https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge" />
+  <img alt="Minimum neovim version" src="https://img.shields.io/badge/Neovim-0.8.0+-blueviolet.svg?style=for-the-badge&" />
+  <img alt="Issues" src="https://img.shields.io/github/issues/OxygeNvim/OxygeNvim?style=for-the-badge" />
 </p>
 
 ## Features
@@ -29,7 +28,7 @@
 
 ### Requirements
 
-1. Latest Neovim 0.8.0 nightly build
+1. Latest Neovim
 2. Git
 3. Patched font
 4. Node.js
@@ -43,7 +42,7 @@
 curl -s https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen | bash -s install
 ```
 
-##### 2. Method: or you can clone the repo
+##### 2. Method: or you can clone the repo manually
 
 ```sh
 git clone https://github.com/OxygeNvim/OxygeNvim ~/.config/nvim
