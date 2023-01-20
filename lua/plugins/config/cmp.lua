@@ -1,17 +1,12 @@
 local cmp = require('cmp')
-local luasnip = require('luasnip')
 
 require('base46').load_highlight('cmp')
-
-require('luasnip.loaders.from_snipmate').load()
-require('luasnip.loaders.from_vscode').load()
-require('luasnip.loaders.from_lua').load()
 
 cmp.setup(utils.merge({
   preselect = cmp.PreselectMode.Item,
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   completion = {
@@ -38,6 +33,8 @@ cmp.setup(utils.merge({
       select = true,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
+      local luasnip = require('luasnip')
+
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -65,4 +62,7 @@ cmp.setup(utils.merge({
     { name = 'buffer', keyword_length = 2 },
     { name = 'vsnip', keyword_length = 2 },
   }),
+  experimental = {
+    ghost_text = {},
+  },
 }, config.plugins.config['nvim-cmp'] or {}))

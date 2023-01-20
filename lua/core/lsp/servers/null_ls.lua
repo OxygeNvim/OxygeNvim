@@ -6,7 +6,11 @@ local has_eslint_config = function(u)
 end
 
 local has_exec = function(exec)
-  return vim.fn.executable(exec)
+  if vim.fn.executable(exec) == 1 then
+    return true
+  else
+    return false
+  end
 end
 
 null_ls.setup(utils.merge({

@@ -4,7 +4,7 @@ local plugins = {
   { 'folke/lazy.nvim' },
 
   {
-    'CanKolay3499/base46',
+    'OxygeNvim/base46',
     lazy = false,
     priority = 1000,
     config = function()
@@ -23,7 +23,6 @@ local plugins = {
     end,
   },
 
-  { 'lewis6991/impatient.nvim', lazy = false },
   { 'nvim-lua/plenary.nvim' },
   { 'MunifTanjim/nui.nvim' },
 
@@ -53,7 +52,7 @@ local plugins = {
 
   {
     'folke/which-key.nvim',
-    keys = '<leader>',
+    event = 'VeryLazy',
     config = function()
       require('plugins.config.other').which_key()
     end,
@@ -83,11 +82,9 @@ local plugins = {
 
   {
     'NvChad/nvim-colorizer.lua',
+    event = 'VeryLazy',
     config = function()
       require('plugins.config.other').colorizer()
-    end,
-    init = function()
-      utils.lazy_load('nvim-colorizer.lua')
     end,
     enabled = not utils.disable_plugin('nvim-colorizer.lua'),
   },
@@ -111,22 +108,22 @@ local plugins = {
   {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
+      vim.opt.list = false
       require('plugins.config.indent-blankline')
     end,
     init = function()
-      vim.opt.list = false
-
       utils.lazy_load('indent-blankline.nvim')
     end,
     enabled = not utils.disable_plugin('indent-blankline.nvim'),
   },
+
+  { 'JoosepAlviste/nvim-ts-context-commentstring', enabled = not utils.disable_plugin('nvim-treesitter') },
 
   {
     'nvim-treesitter/nvim-treesitter',
     cmd = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSEnable', 'TSDisable', 'TSModuleInfo' },
     dependencies = {
       { 'windwp/nvim-ts-autotag' },
-      { 'JoosepAlviste/nvim-ts-context-commentstring' },
     },
     config = function()
       require('plugins.config.treesitter')
@@ -140,6 +137,9 @@ local plugins = {
   {
     'lewis6991/gitsigns.nvim',
     ft = 'gitcommit',
+    config = function()
+      require('plugins.config.other').gitsigns()
+    end,
     init = function()
       vim.api.nvim_create_autocmd({ 'BufRead' }, {
         group = vim.api.nvim_create_augroup('GitSignsLazyLoad', { clear = true }),
@@ -153,9 +153,6 @@ local plugins = {
           end
         end,
       })
-    end,
-    config = function()
-      require('plugins.config.other').gitsigns()
     end,
     enabled = not utils.disable_plugin('gitsigns.nvim'),
   },
@@ -279,13 +276,23 @@ local plugins = {
   },
 
   {
+    'L3MON4D3/LuaSnip',
+    dependencies = {
+      {
+        'rafamadriz/friendly-snippets',
+        config = function()
+          require('luasnip.loaders.from_vscode').lazy_load()
+        end,
+      },
+    },
+    enabled = cmp,
+  },
+
+  {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
-      { 'L3MON4D3/LuaSnip' },
-      { 'rafamadriz/friendly-snippets' },
       { 'saadparwaiz1/cmp_luasnip' },
-
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-nvim-lua' },
       { 'hrsh7th/cmp-buffer' },
@@ -310,10 +317,8 @@ if userPlugins then
   if type(userPlugins) == 'table' then
     table.insert(plugins, userPlugins)
   else
-    utils.logger.warn('Expected table but got "' .. type(userPlugins) .. '" in plugins config!')
+    utils.logger.warn('Expected table but got "' .. type(userPlugins) .. '" in user plugin\'s!')
   end
 end
 
-local lazy = require('lazy')
-
-lazy.setup(plugins, require('plugins.config.lazy'))
+return plugins

@@ -1,18 +1,11 @@
-local c = vim.cmd
-
-local modules = {
+for _, module in pairs({
   'core.editor',
   'core.keymaps',
   'core.commands',
-}
-for _, module in pairs(modules) do
+}) do
   r(module)
 end
 
-c('filetype plugin on')
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  command = [[%s/\s\+$//e]],
-})
+vim.cmd('filetype plugin on')
 
 utils.load_keymap('main')

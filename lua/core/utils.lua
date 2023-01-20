@@ -94,7 +94,7 @@ utils.lazy_load = function(plugin)
 
       if condition then
         if plugin ~= 'nvim-treesitter' then
-          vim.schedule(function()
+          vim.defer_fn(function()
             require('lazy').load({ plugins = plugin })
 
             if plugin == 'nvim-lspconfig' then

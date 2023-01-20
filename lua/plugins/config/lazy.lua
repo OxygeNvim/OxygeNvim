@@ -1,12 +1,16 @@
 return utils.merge({
   defaults = {
     lazy = true,
+    version = false,
   },
   ui = {
     border = config.ui.border,
   },
   install = {
-    colorschemes = { 'base46' },
+    colorscheme = { 'base46' },
+  },
+  change_detection = {
+    enabled = false,
   },
   performance = {
     rtp = {
