@@ -36,17 +36,6 @@ M['bufferline.nvim'] = {
     ['<S-TAB>'] = { ':BufferLineCyclePrev<CR>', 'Previous Buffer' },
     ['<leader>bn'] = { ':BufferLineCycleNext<CR>', 'Next Buffer' },
     ['<leader>bp'] = { ':BufferLineCyclePrev<CR>', 'Previous Buffer' },
-    ['<leader>bx'] = {
-      function()
-        local ok, bufdelete = r('bufdelete')
-        if not ok then
-          return false
-        end
-
-        bufdelete.bufdelete(0, true)
-      end,
-      'Close current buffer/window',
-    },
   },
 }
 
@@ -201,5 +190,7 @@ M['move.nvim'] = {
 if config.keymaps.custom then
   M.main = utils.merge(M.main, config.keymaps.custom)
 end
+
+vim.g.mapleader = config.keymaps.leader
 
 return M
