@@ -14,7 +14,7 @@ function printc() {
 
 NVIM_DIR="$HOME/.config/nvim"
 ARCH=$(uname -m)
-OS=$
+OS=""
 SUDO=""
 
 python_packages="neovim setuptools"
@@ -64,7 +64,7 @@ fi
 if [ ! -x "$(command -v nvim)" ]; then
 	printc ${RED} "Can't found nvim executable!"
 
-	if confirm "${GREEN}Would you like to install?"; then
+	if confirm "${GREEN}Would you like to install it?"; then
 		if [ "$OS" = "Android" ]; then
 			printc $BLUE "Installing neovim..."
 
@@ -72,33 +72,38 @@ if [ ! -x "$(command -v nvim)" ]; then
 			rm $PREFIX/share/nvim/sysinit.vim
 
 			printc $GREEN "Done!"
-		fi
+		elif [ "$OS" != "darwin" ] && [ -x "$(command -v apt)" ]; then
+			printc $BLUE "Installing neovim x64 deb..."
 
-		if [ "${ARCH}" = "x86_64" ]; then
-			if [ "$OS" != "darwin" ] && [ -x "$(command -v apt)" ]; then
-				printc $BLUE "Installing neovim x64 deb"
+			tmp=$(mktemp)
 
-				curl -SL https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb -o ${HOME}/nvim.deb
-				$SUDO apt install ${HOME}/nvim.deb
-				rm $HOME/nvim.deb
+			curl -SL https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb -o $tmp/nvim.deb --progress-bar
+			$SUDO apt install $tmp/nvim.deb
 
+			printc $GREEN "Done!"
+		elif [ "${ARCH}" = "x86_64" ]; then
+			printc $BLUE "Installing neovim appimage..."
+
+			tmp=$(mktemp)
+
+			curl -SL https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -o $tmp/nvim.appimage --progress-bar
+			$SUDO chmod +x $tmp/nvim.appimage
+			$SUDO mv $tmp/nvim.appimage /usr/local/bin/nvim
+
+			if nvim -c "quitall"; then
 				printc $GREEN "Done!"
 			else
-				printc $BLUE "Installing neovim appimage"
-
-				curl -SL https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -o $HOME/nvim.appimage
-				$SUDO chmod +x $HOME/nvim.appimage
-				$SUDO mv $HOME/nvim.appimage /usr/local/bin/nvim
-
-				if nvim -c "quitall"; then
-					printc $GREEN "Done!"
-				else
-					sudo rm -rf /usr/local/bin/nvim
-					printc $RED "Failed installing neovim! Please try installing neovim yourself and run this script again."
-					exit 1
-				fi
+				sudo rm -rf /usr/local/bin/nvim
+				printc $RED "Failed installing neovim! Please try installing neovim and run this script again!"
+				exit 1
 			fi
+		else
+			printc $RED "Unsupported platform! Please install neovim and run this script again!"
+			exit 1
 		fi
+	else
+		printc $RED "Can't continue installation without neovim. Please install neovim and run this script again!"
+		exit 1
 	fi
 fi
 
@@ -106,10 +111,10 @@ function clone() {
 	printc $BLUE "Cloning OxygeNvim..."
 
 	if [ ! -d "$HOME/.config"]; then
-		mkdir -p $HOME/.config/
+		mkdir -p $HOME/.config
 	fi
 
-	git clone https://github.com/OxygeNvim/OxygeNvim $NVIM_DIR/
+	git clone https://github.com/OxygeNvim/OxygeNvim $NVIM_DIR
 	cd $NVIM_DIR
 
 	printc $GREEN "Done!"
@@ -128,6 +133,9 @@ install)
 			printc $GREEN "Done!"
 
 			clone
+		else
+			printc $RED "Found OxygeNvim, exiting the installation."
+			exit 0
 		fi
 	else
 		clone
@@ -219,7 +227,6 @@ uninstall)
 			pip-autoremove -y ${python_packages}
 		else
 			printc $RED "You need pip to uninstall python modules!"
-
 			exit 1
 		fi
 	fi
@@ -248,7 +255,7 @@ uninstall)
 	printc $GREEN "Done!"
 	;;
 *)
-	echo "oxygen - A script utility for OxygeNvim installation and uninstallation"
+	echo "oxygen - A script utility for installing and uninstalling OxygeNvim"
 	echo ""
 	echo "Commands:"
 	echo "  install - Installs OxygeNvim and their required packages"
