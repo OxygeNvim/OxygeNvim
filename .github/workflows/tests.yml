@@ -18,14 +18,14 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install CNvim
-        run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/cnvim) install -y
+      - name: Install OxygeNvim
+        run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen) install -y
 
       - name: Open neovim
-        run: nvim --headless -c "CnvimSync"
+        run: nvim --headless -c "OxygenSync"
 
-      - name: Uninstall CNvim
-        run: bash <(curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/cnvim) uninstall -y
+      - name: Uninstall OxygeNvim
+        run: bash <(curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen) uninstall -y
 
   test-macos:
     name: Test MacOS - Latest
@@ -42,11 +42,11 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install CNvim
-        run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/cnvim) install -y
+      - name: Install OxygeNvim
+        run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen) install -y
 
       - name: Open neovim
-        run: nvim --headless -c "CnvimSync"
+        run: nvim --headless -c "OxygenSync"
 
-      - name: Uninstall CNvim
-        run: bash <(curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/cnvim) uninstall -y
+      - name: Uninstall OxygeNvim
+        run: bash <(curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen) uninstall -y
