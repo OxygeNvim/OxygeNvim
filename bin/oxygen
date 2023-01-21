@@ -75,7 +75,7 @@ if [ ! -x "$(command -v nvim)" ]; then
 		elif [ "$OS" != "darwin" ] && [ -x "$(command -v apt)" ]; then
 			printc $BLUE "Installing neovim x64 deb..."
 
-			tmp=$(mktemp)
+			tmp=$(mktemp -d)
 
 			curl --progress-bar -O --output-dir $tmp https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb
 			$SUDO apt install $tmp/nvim-linux64.deb
@@ -84,7 +84,7 @@ if [ ! -x "$(command -v nvim)" ]; then
 		elif [ "${ARCH}" = "x86_64" ]; then
 			printc $BLUE "Installing neovim appimage..."
 
-			tmp=$(mktemp)
+			tmp=$(mktemp -d)
 
 			curl --progress-bar -O --output-dir $tmp https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 			$SUDO chmod +x $tmp/nvim.appimage
