@@ -27,7 +27,7 @@ local plugins = {
   { 'MunifTanjim/nui.nvim' },
 
   {
-    'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
     config = function()
       require('plugins.config.other').devicons()
     end,
@@ -263,7 +263,7 @@ local plugins = {
   },
 
   {
-    'kyazdani42/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     cmd = { 'NvimTree', 'NvimTreeToggle', 'NvimTreeFocus', 'NvimTreeClose' },
     dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = function()
