@@ -65,6 +65,8 @@ if [ ! -x "$(command -v nvim)" ]; then
 	printc ${RED} "Can't found nvim executable!"
 
 	if confirm "${GREEN}Would you like to install it?"; then
+		tmp=$(mktemp -d)
+
 		if [ "$OS" = "Android" ]; then
 			printc $BLUE "Installing neovim..."
 
@@ -72,19 +74,21 @@ if [ ! -x "$(command -v nvim)" ]; then
 			rm $PREFIX/share/nvim/sysinit.vim
 
 			printc $GREEN "Done!"
-		elif [ "$OS" != "darwin" ] && [ -x "$(command -v apt)" ]; then
-			printc $BLUE "Installing neovim x64 deb..."
+		elif [ "$OS" = "darwin" ]; then
+			printc $BLUE "Installing neovim..."
 
-			tmp=$(mktemp -d)
+			brew install --HEAD neovim
+
+			printc $GREEN "Done!"
+		elif [ -x "$(command -v apt)" ]; then
+			printc $BLUE "Installing neovim x64 deb..."
 
 			curl --progress-bar -fsSL https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb -o $tmp/nvim-linux64.deb
 			$SUDO apt install $tmp/nvim-linux64.deb
 
 			printc $GREEN "Done!"
-		elif [ "${ARCH}" = "x86_64" ]; then
+		elif [ "$ARCH" = "x86_64" ]; then
 			printc $BLUE "Installing neovim appimage..."
-
-			tmp=$(mktemp -d)
 
 			curl --progress-bar -fsSL https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -o $tmp/nvim.appimage
 			$SUDO chmod +x $tmp/nvim.appimage
