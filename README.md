@@ -4,11 +4,6 @@
 </div>
 
 <p align="center">
-  <a href="https://github.com/OxygeNvim/OxygeNvim/wiki/Installation">Installation</a> |
-  <a href="https://github.com/OxygeNvim/OxygeNvim/wiki/Screenshots">Screenshots</a>
-</p>
-
-<p align="center">
   <img alt="Made with lua" src="https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua" />
   <img alt="Minimum neovim version" src="https://img.shields.io/badge/Neovim-0.8.0+-blueviolet.svg?style=for-the-badge&" />
   <img alt="Stargazers" src="https://img.shields.io/github/stars/OxygeNvim/OxygeNvim?style=for-the-badge" />
