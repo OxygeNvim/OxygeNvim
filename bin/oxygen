@@ -77,8 +77,8 @@ if [ ! -x "$(command -v nvim)" ]; then
 
 			tmp=$(mktemp)
 
-			curl -SL https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb -o $tmp/nvim.deb --progress-bar
-			$SUDO apt install $tmp/nvim.deb
+			curl --progress-bar -O --output-dir $tmp https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb
+			$SUDO apt install $tmp/nvim-linux64.deb
 
 			printc $GREEN "Done!"
 		elif [ "${ARCH}" = "x86_64" ]; then
@@ -86,7 +86,7 @@ if [ ! -x "$(command -v nvim)" ]; then
 
 			tmp=$(mktemp)
 
-			curl -SL https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -o $tmp/nvim.appimage --progress-bar
+			curl --progress-bar -O --output-dir $tmp https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 			$SUDO chmod +x $tmp/nvim.appimage
 			$SUDO mv $tmp/nvim.appimage /usr/local/bin/nvim
 
