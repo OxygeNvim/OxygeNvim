@@ -1,7 +1,6 @@
-local ok, base46 = r('base46')
-if ok then
-  base46.load_highlight('statusline')
-end
+-- Creadits to nvchad for this statusline components code
+
+require('base46').load_highlight('statusline')
 
 local fn = vim.fn
 
