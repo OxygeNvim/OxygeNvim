@@ -229,7 +229,7 @@ local plugins = {
   {
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',
-    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('plugins.config.bufferline')
     end,
@@ -265,7 +265,7 @@ local plugins = {
   {
     'nvim-tree/nvim-tree.lua',
     cmd = { 'NvimTree', 'NvimTreeToggle', 'NvimTreeFocus', 'NvimTreeClose' },
-    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('plugins.config.filemanager')
     end,
