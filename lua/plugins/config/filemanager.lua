@@ -14,7 +14,6 @@ nvimtree.setup(utils.merge({
     enable = true,
     auto_open = true,
   },
-  open_on_setup = false,
   hijack_unnamed_buffer_when_opening = false,
   update_cwd = true,
   update_focused_file = {

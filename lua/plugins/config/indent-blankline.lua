@@ -11,6 +11,8 @@ indentblankline.setup(utils.merge({
     'lspinfo',
     'TelescopePrompt',
     'TelescopeResults',
+    'mason',
+    'lazy',
   },
   buftype_exclude = { 'terminal' },
   show_trailing_blankline_indent = false,

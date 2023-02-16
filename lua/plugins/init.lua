@@ -1,7 +1,12 @@
 local cmp = not utils.disable_plugin('nvim-cmp')
 
 local plugins = {
-  { 'folke/lazy.nvim' },
+  {
+    'folke/lazy.nvim',
+    config = function()
+      require('base46').load_highlight('lazy')
+    end,
+  },
 
   {
     'OxygeNvim/base46',
@@ -190,8 +195,11 @@ local plugins = {
     enabled = not utils.disable_plugin('todo-comments.nvim'),
   },
 
-  { 'b0o/SchemaStore.nvim', ft = 'json', enabled = config.lsp.enabled },
-
+  {
+    'b0o/SchemaStore.nvim',
+    ft = 'json',
+    enabled = config.lsp.enabled,
+  },
   {
     'neovim/nvim-lspconfig',
     dependencies = {
