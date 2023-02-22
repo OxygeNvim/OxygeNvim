@@ -9,7 +9,7 @@ local plugins = {
   },
 
   {
-    dir = '~/code/oxygen/base46',
+    dir = 'OxygeNvim/base46',
     lazy = false,
     priority = 1000,
     config = function()
@@ -19,7 +19,7 @@ local plugins = {
   },
 
   {
-    dir = '~/code/oxygen/ui',
+    dir = 'OxygeNvim/ui',
     lazy = false,
     config = function()
       require('oxygen.ui')
