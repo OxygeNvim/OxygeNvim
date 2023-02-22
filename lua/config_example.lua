@@ -16,7 +16,7 @@ M.keymaps = {
 M.ui = {
   theme = 'rosepine',
   border = 'rounded', -- rounded, single, double
-  transparency = false,
+  cmp_style = 'atom', -- default, atom, bordered
   statusline = {
     separator_style = 'default', -- default | round | block | arrow
   },
@@ -26,11 +26,9 @@ M.plugins = {
   add = {
     -- { 'foo/bar' }
   },
-
   remove = {
     -- 'foobar.nvim'
   },
-
   config = {
     ['nvim-treesitter'] = {
       ensure_installed = {
@@ -54,11 +52,10 @@ M.plugins = {
 M.lsp = {
   enabled = true,
   format_on_save = true,
-
   -- Default servers
   servers = {
     clangd = {
-      -- use local clangd
+      -- use local clangd instead of installing it from mason
       install = false,
     }, -- C, C++
 

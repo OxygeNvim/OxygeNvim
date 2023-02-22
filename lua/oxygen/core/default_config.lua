@@ -9,7 +9,7 @@ config.keymaps = {
 config.ui = {
   theme = 'rosepine',
   border = 'rounded',
-  transparency = false,
+  cmp_style = 'default',
   statusline = {
     separator_style = 'default',
   },
@@ -24,15 +24,13 @@ config.plugins = {
 config.lsp = {
   enabled = true,
   format_on_save = true,
-
+  servers = {},
   formatters = {
     ['null-ls'] = true,
     jsonls = false,
     sumneko_lua = false,
     tsserver = false,
   },
-
-  servers = {},
 }
 
 local ok, user_config = r('config')
