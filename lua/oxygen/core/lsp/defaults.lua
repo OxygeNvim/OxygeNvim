@@ -4,9 +4,8 @@ local M = {}
 
 M.autostart = true
 
+local auto_format_lock = false
 M.on_attach = function(client, _)
-  local auto_format_lock = false
-
   if config.lsp.formatters[client.name] == true then
     client.server_capabilities.document_range_formatting = true
     client.server_capabilities.document_formatting = true

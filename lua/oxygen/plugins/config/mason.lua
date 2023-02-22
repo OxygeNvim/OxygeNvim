@@ -1,13 +1,6 @@
 local mason = require('mason')
 
-vim.api.nvim_create_augroup('_mason', { clear = true })
-vim.api.nvim_create_autocmd('Filetype', {
-  pattern = 'mason',
-  group = '_mason',
-  callback = function()
-    base46.load_highlight('mason')
-  end,
-})
+base46.load_highlight('mason')
 
 mason.setup(utils.merge({
   ui = {

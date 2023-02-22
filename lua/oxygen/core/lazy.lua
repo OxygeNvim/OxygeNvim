@@ -3,12 +3,12 @@ if not vim.loop.fs_stat(lazypath) then
   utils.logger.log('Cloning lazy...')
 
   vim.fn.system({
-      'git',
-      'clone',
-      '--filter=blob:none',
-      'https://github.com/folke/lazy.nvim.git',
-      '--branch=stable',
-      lazypath,
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable',
+    lazypath,
   })
 
   vim.opt.rtp:prepend(lazypath)

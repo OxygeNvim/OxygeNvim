@@ -1,13 +1,13 @@
--- vim: ft=lua tw=80
+-- vim: ft=lua
 
 stds.nvim = {
   globals = {
     'vim',
-    'config',
     'utils',
-    'r',
-    'commands',
+    'base46',
+    'config',
     'ui',
+    'r',
   },
   read_globals = {
     'os',
