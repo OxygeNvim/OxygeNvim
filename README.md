@@ -47,7 +47,7 @@
 <summary>Bash, ZSH</summary>
 
 ```sh
-bash <(curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen) install
+bash <(curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen) install
 ```
 
 </details>
