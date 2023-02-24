@@ -59,7 +59,7 @@ M.lsp = {
       install = false,
     }, -- C, C++
 
-    sumneko_lua = {
+    lua_ls = {
       config = {
         -- lsp configuration options comes here
       },
