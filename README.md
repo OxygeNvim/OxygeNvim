@@ -56,7 +56,7 @@ bash <(curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen) instal
 <summary>Fish</summary>
 
 ```sh
-bash (curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen | psub) install
+bash (curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen | psub) install
 ```
 
 </details>
