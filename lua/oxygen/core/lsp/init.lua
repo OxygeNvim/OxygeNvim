@@ -6,8 +6,6 @@ base46.load_highlight('lsp')
 require('oxygen.core.lsp.ui')
 
 for server_name, user_opts in pairs(config.lsp.servers) do
-  require('oxygen.core.lsp.mason')
-
   local opts = defaults
 
   local ok_server, server_opts = r('oxygen.core.lsp.servers.' .. server_name)
