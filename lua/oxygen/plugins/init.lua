@@ -10,6 +10,7 @@ local plugins = {
 
   {
     'OxygeNvim/base46',
+    dev = true,
     lazy = false,
     priority = 1000,
     config = function()
