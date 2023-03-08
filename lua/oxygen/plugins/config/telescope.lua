@@ -46,5 +46,9 @@ telescope.setup(utils.merge({
     grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
     qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
     buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker,
+    mappings = {
+      n = { ['q'] = require('telescope.actions').close },
+    },
   },
+  extensions_list = { 'theme_switcher' },
 }, config.plugins.config['telescope.nvim'] or {}))
