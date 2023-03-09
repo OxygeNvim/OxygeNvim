@@ -28,6 +28,16 @@ local plugins = {
     end,
   },
 
+  {
+    'OxygeNvim/extensions',
+    dev = true,
+    lazy = false,
+    config = function()
+      require('oxygen.extensions')
+      extensions.setup()
+    end,
+  },
+
   { 'nvim-lua/plenary.nvim' },
   { 'MunifTanjim/nui.nvim' },
 

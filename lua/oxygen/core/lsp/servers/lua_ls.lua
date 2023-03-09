@@ -12,7 +12,7 @@ M.settings = {
       path = runtime_path,
     },
     diagnostics = {
-      globals = { 'vim', 'utils', 'config', 'ui', 'base46' },
+      globals = { 'vim', 'utils', 'config', 'ui', 'base46', 'extensions' },
       redefinedLocal = false,
     },
     workspace = {
