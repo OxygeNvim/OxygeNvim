@@ -21,6 +21,7 @@ local plugins = {
 
   {
     'OxygeNvim/ui',
+    dev = true,
     lazy = false,
     config = function()
       require('oxygen.ui')
