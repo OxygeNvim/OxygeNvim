@@ -105,7 +105,7 @@ end
 
 --- @param old_text string
 --- @param new_text string
-utils.replace_word = function (old_text, new_text)
+utils.replace_word = function(old_text, new_text)
   local config = vim.fn.stdpath('config') .. '/lua/config.lua'
 
   local pattern = string.gsub(old_text, '-', '%%-')

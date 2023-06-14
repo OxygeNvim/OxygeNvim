@@ -101,8 +101,8 @@ local plugins = {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
     dependencies = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim',
+      'popup.nvim',
+      'plenary.nvim',
     },
     config = function()
       require('oxygen.plugins.config.telescope')
@@ -127,8 +127,8 @@ local plugins = {
 
   {
     'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdateSync',
     cmd = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSEnable', 'TSDisable', 'TSModuleInfo' },
+    build = ':TSUpdateSync',
     dependencies = {
       {
         'JoosepAlviste/nvim-ts-context-commentstring',
@@ -225,19 +225,18 @@ local plugins = {
     enabled = config.lsp.enabled,
   },
 
-
   {
     'williamboman/mason.nvim',
     cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
     dependencies = {
-  {
-    'williamboman/mason-lspconfig.nvim',
-    cmd = { 'LspInstall', 'LspUninstall' },
-    config = function()
-      require('oxygen.plugins.config.mason.lsp')
-    end,
-    enabled = config.lsp.enabled or not utils.disable_plugin('mason.nvim'),
-  },
+      {
+        'williamboman/mason-lspconfig.nvim',
+        cmd = { 'LspInstall', 'LspUninstall' },
+        config = function()
+          require('oxygen.plugins.config.mason.lsp')
+        end,
+        enabled = config.lsp.enabled or not utils.disable_plugin('mason.nvim'),
+      },
     },
     config = function()
       require('oxygen.plugins.config.mason')
@@ -248,7 +247,7 @@ local plugins = {
   {
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = { 'nvim-web-devicons' },
     config = function()
       require('oxygen.plugins.config.bufferline')
     end,

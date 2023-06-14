@@ -4,9 +4,11 @@ local get_packages = function()
   local packages = {}
 
   for server_name, user_config in pairs(config.lsp.servers) do
-    local install = user_config.install
-    if install ~= false or install == nil then
+    local install
+    if user_config.install ~= false or user_config.install == nil then
       install = true
+    else
+      install = false
     end
 
     if install then

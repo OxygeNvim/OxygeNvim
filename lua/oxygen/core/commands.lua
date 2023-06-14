@@ -1,7 +1,7 @@
 local command = vim.api.nvim_create_user_command
 
 command('OxygenSync', extensions.updater, {
-  desc = 'Updates OxygeNvim',
+  desc = 'Update OxygeNvim',
 })
 
 command('Format', function()

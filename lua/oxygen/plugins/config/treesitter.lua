@@ -27,4 +27,5 @@ treesitter.setup(utils.merge({
   indent = {
     enable = true,
   },
+  additional_vim_regex_highlighting = true,
 }, config.plugins.config['nvim-treesitter'] or {}))

@@ -7,7 +7,7 @@ M.aerial = function()
 
   aerial.setup(utils.merge({
     layout = {
-      min_width = 20,
+      min_width = 40,
     },
   }, config.plugins.config['aerial.nvim'] or {}))
 end
@@ -92,9 +92,9 @@ M.colorizer = function()
       RGB = true,
       RRGGBB = true,
       names = false,
-      RRGGBBAA = false,
-      rgb_fn = false,
-      hsl_fn = false,
+      RRGGBBAA = true,
+      rgb_fn = true,
+      hsl_fn = true,
       css = false,
       css_fn = false,
       mode = 'background',
