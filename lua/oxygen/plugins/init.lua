@@ -213,6 +213,9 @@ local plugins = {
       },
       {
         'williamboman/mason.nvim',
+        dependencies = {
+          'williamboman/mason-lspconfig.nvim',
+        },
         cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
         config = function()
           require('oxygen.plugins.config.mason')
