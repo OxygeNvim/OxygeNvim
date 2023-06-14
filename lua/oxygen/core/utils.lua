@@ -104,22 +104,22 @@ utils.logger._log = function(type, message, write_log, show_message)
 end
 
 --- @param message string
---- @param no_write_log boolean
---- @param no_show_message boolean
+--- @param no_write_log? boolean
+--- @param no_show_message? boolean
 utils.logger.log = function(message, no_write_log, no_show_message)
   utils.logger._log(vim.log.levels.INFO, message, not no_write_log, not no_show_message)
 end
 
 --- @param message string
---- @param no_write_log boolean
---- @param no_show_message boolean
+--- @param no_write_log? boolean
+--- @param no_show_message? boolean
 utils.logger.warn = function(message, no_write_log, no_show_message)
-  utils.logger._log(vim.log.levels.WARN, message, not no_write_log)
+  utils.logger._log(vim.log.levels.WARN, message, not no_write_log, not no_show_message)
 end
 
 --- @param message string
---- @param no_write_log boolean
---- @param no_show_message boolean
+--- @param no_write_log? boolean
+--- @param no_show_message? boolean
 utils.logger.error = function(message, no_write_log, no_show_message)
   utils.logger._log(vim.log.levels.ERROR, message, not no_write_log, not no_show_message)
 end
