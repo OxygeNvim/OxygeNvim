@@ -7,6 +7,7 @@ stds.nvim = {
     'base46',
     'config',
     'ui',
+    'extensions',
     'r',
   },
   read_globals = {

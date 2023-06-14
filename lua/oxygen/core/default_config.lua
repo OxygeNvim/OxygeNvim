@@ -2,6 +2,10 @@
 
 _G.config = {}
 
+config.core = {
+  branch = 'testing',
+}
+
 config.keymaps = {
   leader = ' ',
 }
