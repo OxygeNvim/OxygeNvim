@@ -29,24 +29,7 @@ M.plugins = {
   remove = {
     -- 'foobar.nvim'
   },
-  config = {
-    ['nvim-treesitter'] = {
-      ensure_installed = {
-        'typescript',
-        'javascript',
-        'markdown',
-        'python',
-        'json',
-        'yaml',
-        'html',
-        'tsx',
-        'css',
-        'vue',
-        'lua',
-        'c',
-      },
-    },
-  },
+  config = {},
 }
 
 M.lsp = {
@@ -58,13 +41,11 @@ M.lsp = {
       -- use local clangd instead of installing it from mason
       install = false,
     }, -- C, C++
-
     lua_ls = {
       config = {
         -- lsp configuration options comes here
       },
     }, -- Lua
-
     rust_analyzer = {}, -- Rust
     jedi_language_server = {}, -- Python
     tsserver = {}, -- JavaCcript, TypeScript
