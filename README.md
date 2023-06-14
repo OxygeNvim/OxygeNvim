@@ -22,9 +22,9 @@
   <img alt="Tundra theme" src="https://github.com/OxygeNvim/OxygeNvim/raw/main/.github/images/tundra.png" />
   <img alt="Gruvbox" src="https://github.com/OxygeNvim/OxygeNvim/raw/main/.github/images/gruvbox.png" />
   <img alt="Gruvbox light" src="https://github.com/OxygeNvim/OxygeNvim/raw/main/.github/images/gruvbox_light.png" />
-
-  <small>Images are from [@Elagoht](https://github.com/Elagoht)</small>
 </div>
+
+> Images from [@Elagoht](https://github.com/Elagoht)
 
 ## 🎃 Features
 
@@ -42,7 +42,7 @@
 
 1. Latest Neovim
 2. Git
-3. Nerd font
+3. Nerd fonts
 
 ### How to install?
 
@@ -65,8 +65,6 @@ bash (curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/c
 ```
 
 </details>
-
-<br>
 
 > You can add `-y` flag to answer yes to all questions
 
