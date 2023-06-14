@@ -21,9 +21,6 @@ jobs:
       - name: Install OxygeNvim
         run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen) install -y
 
-      - name: Open neovim
-        run: nvim --headless -c "OxygenSync"
-
       - name: Uninstall OxygeNvim
         run: bash <(curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen) uninstall -y
 
@@ -43,9 +40,6 @@ jobs:
 
       - name: Install OxygeNvim
         run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen) install -y
-
-      - name: Open neovim
-        run: nvim --headless -c "OxygenSync"
 
       - name: Uninstall OxygeNvim
         run: bash <(curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen) uninstall -y
