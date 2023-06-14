@@ -1,5 +1,9 @@
 local M = {}
 
+M.core = {
+  branch = 'testing',
+}
+
 M.keymaps = {
   leader = ' ',
   custom = {
@@ -27,14 +31,20 @@ M.ui = {
 }
 
 M.plugins = {
-  add = {},
-  remove = {},
+  add = {
+    -- { 'foo/bar' }
+  },
+  remove = {
+    -- 'foobar.nvim'
+  },
   config = {},
 }
 
+-- Language server protocol
 M.lsp = {
   enabled = true,
   format_on_save = true,
+  -- Default servers
   servers = {
     clangd = {
       -- use local clangd instead of installing it from mason
@@ -49,6 +59,7 @@ M.lsp = {
     jedi_language_server = {}, -- Python
     tsserver = {}, -- JavaCcript, TypeScript
     jsonls = {}, -- Json
+    yamlls = {}, -- Yaml
     bashls = {}, -- Sh, Bash
     cssls = {}, -- CSS
     vuels = {}, -- Vue
