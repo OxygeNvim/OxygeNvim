@@ -31,8 +31,6 @@ mason.setup(utils.merge({
   },
 }, config.plugins.config['mason'] or {}))
 
-vim.print(get_packages())
-
 mason_lspconfig.setup({
   ensure_installed = get_packages(),
 })
