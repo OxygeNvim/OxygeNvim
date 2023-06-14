@@ -1,0 +1,265 @@
+#!/usr/bin/env bash
+
+set -e
+
+GREEN="\033[0;32m"
+BLUE="\033[0;34m"
+GRAY="\033[0;37m"
+RED="\033[0;31m"
+ENDC="\033[0m"
+
+function printc() {
+	echo -e "${1}${2}${ENDC}"
+}
+
+NVIM_DIR="$HOME/.config/nvim"
+ARCH=$(uname -m)
+OS=$
+SUDO=""
+
+python_packages="neovim setuptools"
+node_packages="neovim"
+
+if [ "$(whoami)" = "root" ]; then
+	printc $RED "Please run this script without root permissions!"
+	exit 1
+fi
+
+if [ "$(uname -s)" = "Darwin"* ]; then
+	OS="darwin"
+else
+	OS=$(uname -o)
+fi
+
+if [ "$OS" != "Android" ]; then
+	SUDO='sudo'
+fi
+
+if [ "${2}" = "-y" ] || [ "${2}" = "--yes" ]; then
+	function confirm() {
+		return 0
+	}
+else
+	function confirm() {
+		question="${1}"
+		printc "$question"
+
+		read -p "$(echo -e "$GRAY Yes or No $ENDC[yN]: $RED")" -r response
+		echo -e $ENDC
+
+		case "$response" in
+		y | Y | yes | YES | Yes)
+			return 0
+			;;
+		n | N | no | NO | No | *[[:blank:]]* | "")
+			return 1
+			;;
+		*)
+			return 1
+			;;
+		esac
+	}
+fi
+
+if [ ! -x "$(command -v nvim)" ]; then
+	printc ${RED} "Can't found nvim executable!"
+
+	if confirm "${GREEN}Would you like to install?"; then
+		if [ "$OS" = "Android" ]; then
+			printc $BLUE "Installing neovim..."
+
+			apt update -y && apt upgrade -y && apt install neovim-nightly -y
+			rm $PREFIX/share/nvim/sysinit.vim
+
+			printc $GREEN "Done!"
+		fi
+
+		if [ "${ARCH}" = "x86_64" ]; then
+			if [ "$OS" != "darwin" ] && [ -x "$(command -v apt)" ]; then
+				printc $BLUE "Installing neovim x64 deb"
+
+				curl -SL https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb -o ${HOME}/nvim.deb
+				$SUDO apt install ${HOME}/nvim.deb
+				rm $HOME/nvim.deb
+
+				printc $GREEN "Done!"
+			else
+				printc $BLUE "Installing neovim appimage"
+
+				curl -SL https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -o $HOME/nvim.appimage
+				$SUDO chmod +x $HOME/nvim.appimage
+				$SUDO mv $HOME/nvim.appimage /usr/local/bin/nvim
+
+				if nvim -c "quitall"; then
+					printc $GREEN "Done!"
+				else
+					sudo rm -rf /usr/local/bin/nvim
+					printc $RED "Failed installing neovim! Please try installing neovim yourself and run this script again."
+					exit 1
+				fi
+			fi
+		fi
+	fi
+fi
+
+function clone() {
+	printc $BLUE "Cloning OxygeNvim..."
+
+	if [ ! -d "$HOME/.config"]; then
+		mkdir -p $HOME/.config/
+	fi
+
+	git clone https://github.com/OxygeNvim/OxygeNvim $NVIM_DIR/
+	cd $NVIM_DIR
+
+	printc $GREEN "Done!"
+}
+
+case "${1}" in
+install)
+	printc $RED "Installing OxygeNvim...\n"
+
+	if [ -d "$NVIM_DIR" ]; then
+		if [ ! -f "$NVIM_DIR/bin/oxygen.txt" ]; then
+			printc $BLUE "Backing up old neovim config..."
+
+			mv $NVIM_DIR "$NVIM_DIR.backup"
+
+			printc $GREEN "Done!"
+
+			clone
+		fi
+	else
+		clone
+	fi
+
+	if [ ! -f "$NVIM_DIR/lua/config.lua" ]; then
+		mv $NVIM_DIR/lua/config_example.lua $NVIM_DIR/lua/config.lua
+	fi
+
+	if confirm "${GREEN}Would you like to install node modules?"; then
+		if [ -x "$(command -v npm)" ]; then
+			printc $BLUE "Installing node modules..."
+
+			$SUDO npm install -g ${node_packages}
+
+			printc $GREEN "Done!"
+		else
+			printc $RED "You need npm to install node modules!"
+			exit 1
+		fi
+	fi
+
+	if confirm "${GREEN}Would you like to install python modules?"; then
+		if [ -x "$(command -v pip)" ]; then
+			printc $BLUE "Installing python modules..."
+
+			pip install ${python_packages}
+
+			printc $GREEN "Done!"
+		else
+			printc $RED "You need pip to install python modules!"
+			exit 1
+		fi
+	fi
+
+	if confirm "${GREEN}Would you like to install stylua?"; then
+		printc $BLUE "Installing stylua..."
+
+		if [ "$OS" = "Android" ]; then
+			apt update && apt upgrade && apt install stylua -y
+
+			printc $GREEN "Done!"
+		else
+			if [ -x "$(command -v cargo)" ]; then
+				printc $BLUE "Installing stylua..."
+
+				cargo install stylua
+
+				printc $GREEN "Done!"
+			else
+				printc $RED "You need cargo to install stylua!"
+				printc $RED "Skipping..."
+			fi
+		fi
+	fi
+
+	if [ "$OS" = "Android" ]; then
+		if [ "$ARCH" = "aarch64" ]; then
+			if confirm "${GREEN}Would you like to install lua-language-server?"; then
+				printc $BLUE "Installing lua-language-server..."
+
+				apt install -y lua-language-server
+
+				printc $GREEN "Done!"
+			fi
+		fi
+	fi
+
+	nvim --headless -c "OxygenSync"
+
+	printc $GREEN "\nOpen neovim and type \`:OxygenSync\`"
+	;;
+
+uninstall)
+	printc $RED "Uninstalling OxygeNvim...\n"
+
+	if confirm "${RED}Do you want to uninstall node modules?"; then
+		if command -v npm &>/dev/null; then
+			$SUDO npm uninstall -g ${node_packages}
+		else
+			printc $RED "You need npm to uninstall node modules!"
+			exit 1
+		fi
+	fi
+
+	if confirm "${RED}Do you want to uninstall python modules?"; then
+		if [ -x "$(command -v pip)" ]; then
+			pip install pip-autoremove
+			pip-autoremove -y ${python_packages}
+		else
+			printc $RED "You need pip to uninstall python modules!"
+
+			exit 1
+		fi
+	fi
+
+	if [ "$OS" = "Android" ]; then
+		if [ "$ARCH" = "aarch64" ]; then
+			apt autopurge -y lua-language-server
+		fi
+
+		apt autopurge -y stylua
+	fi
+
+	if confirm "${RED}Do you want to remove neovim config$GREEN($NVIM_DIR)$RED?"; then
+		cd $HOME
+
+		printc $BLUE "Removing neovim config..."
+
+		rm -rf $NVIM_DIR
+		rm -rf $HOME/.cache/nvim/
+		rm -rf $HOME/.local/share/nvim/
+		rm -rf $HOME/.local/state/nvim/
+	else
+		printc $BLUE "Skipping..."
+	fi
+
+	printc $GREEN "Done!"
+	;;
+*)
+	echo "oxygen - A script utility for OxygeNvim installation and uninstallation"
+	echo ""
+	echo "Commands:"
+	echo "  install - Installs OxygeNvim and their required packages"
+	echo "  uninstall - Uninstalls OxygeNvim and packages that installed via install command"
+	echo ""
+	echo "Args:"
+	echo "  -y | --yes - Answer yes to all question's"
+
+	;;
+esac
+
+cd $HOME
+
+exit 0
