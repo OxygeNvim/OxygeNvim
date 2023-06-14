@@ -1,4 +1,7 @@
+local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
+
+base46.load_highlight('mason')
 
 local get_packages = function()
   local packages = {}
@@ -18,6 +21,17 @@ local get_packages = function()
 
   return packages
 end
+
+mason.setup(utils.merge({
+  ui = {
+    border = config.ui.border,
+    icons = {
+      server_installed = '✓',
+      server_pending = '➜',
+      server_uninstalled = '✗',
+    },
+  },
+}, config.plugins.config['mason'] or {}))
 
 mason_lspconfig.setup({
   ensure_installed = get_packages(),

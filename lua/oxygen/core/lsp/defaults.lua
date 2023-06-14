@@ -6,7 +6,7 @@ M.autostart = true
 
 M.on_attach = function(client, bufnr)
   if config.lsp.format_on_save then
-    if config.lsp.formatters[client.name] == true and client.supports_method("textDocument/formatting") then
+    if config.lsp.formatters[client.name] == true and client.supports_method('textDocument/formatting') then
       vim.api.nvim_create_autocmd('BufWritePre', {
         buffer = bufnr,
         callback = function()

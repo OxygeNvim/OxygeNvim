@@ -7,22 +7,22 @@ end
 
 null_ls.setup(utils.merge({
   sources = {
-  null_ls.builtins.formatting.prettierd.with({
-    env = {
-      PRETTIERD_DEFAULT_CONFIG = vim.fn.getcwd() .. '/.prettierrc',
-    },
-  }),
-  null_ls.builtins.code_actions.eslint_d.with({
-    condition = has_eslint_config,
-    prefer_local = 'node_modules/.bin',
-  }),
-  null_ls.builtins.diagnostics.eslint_d.with({
-    condition = has_eslint_config,
-    prefer_local = 'node_modules/.bin',
-  }),
-  null_ls.builtins.formatting.clang_format,
-  null_ls.builtins.formatting.shfmt,
-  null_ls.builtins.formatting.stylua,
-  null_ls.builtins.formatting.black,
-},
+    null_ls.builtins.formatting.prettierd.with({
+      env = {
+        PRETTIERD_DEFAULT_CONFIG = vim.fn.getcwd() .. '/.prettierrc',
+      },
+    }),
+    null_ls.builtins.code_actions.eslint_d.with({
+      condition = has_eslint_config,
+      prefer_local = 'node_modules/.bin',
+    }),
+    null_ls.builtins.diagnostics.eslint_d.with({
+      condition = has_eslint_config,
+      prefer_local = 'node_modules/.bin',
+    }),
+    null_ls.builtins.formatting.clang_format,
+    null_ls.builtins.formatting.shfmt,
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.black,
+  },
 }, defaults, config.plugins.add['null-ls.nvim'] or {}))

@@ -146,7 +146,7 @@ local plugins = {
 
   {
     'lewis6991/gitsigns.nvim',
-    ft = 'gitcommit',
+    ft = { 'gitcommit', 'diff' },
     init = function()
       vim.api.nvim_create_autocmd({ 'BufRead' }, {
         group = vim.api.nvim_create_augroup('GitSignsLazyLoad', { clear = true }),
@@ -204,8 +204,6 @@ local plugins = {
     enabled = config.lsp.enabled,
   },
 
-
-
   {
     'neovim/nvim-lspconfig',
     config = function()
@@ -235,10 +233,6 @@ local plugins = {
       {
         'williamboman/mason-lspconfig.nvim',
         cmd = { 'LspInstall', 'LspUninstall' },
-        config = function()
-          require('oxygen.plugins.config.mason.lsp')
-        end,
-        enabled = config.lsp.enabled or not utils.disable_plugin('mason.nvim'),
       },
     },
     config = function()
@@ -296,6 +290,7 @@ local plugins = {
 
   {
     'L3MON4D3/LuaSnip',
+    event = 'InsertEnter',
     dependencies = {
       {
         'rafamadriz/friendly-snippets',
