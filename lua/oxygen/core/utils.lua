@@ -66,6 +66,10 @@ utils.logger._log = function(type, message, write_log, show_message)
   if write_log then
     local file_name = vim.fn.stdpath('cache') .. '/oxygen/log'
 
+    if not utils.filesystem.check_dir(vim.fn.stdpath('cache') .. '/oxygen') then
+      utils.filesystem.create_dir(vim.fn.stdpath('cache') .. '/oxygen')
+    end
+
     if not utils.filesystem.check_file(file_name) then
       utils.filesystem.create_file(file_name)
     end
@@ -103,15 +107,14 @@ utils.logger._log = function(type, message, write_log, show_message)
   end
 end
 
+--- @param file_name string
 --- @param old_text string
 --- @param new_text string
-utils.replace_word = function(old_text, new_text)
-  local config = vim.fn.stdpath('config') .. '/lua/config.lua'
+utils.replace_word = function(file_name, old_text, new_text)
+  local content = utils.filesystem.get_file(file_name)
+  local output = string.gsub(content, old_text, new_text)
 
-  local pattern = string.gsub(old_text, '-', '%%-')
-
-  local new_content = utils.filesystem.get_file(config):gsub(pattern, new_text)
-  utils.filesystem.write_file(config, new_content)
+  utils.filesystem.write_file(file_name, output)
 end
 
 --- @param package_name string

@@ -204,20 +204,23 @@ local plugins = {
     enabled = config.lsp.enabled,
   },
 
-  {
-    'jose-elias-alvarez/null-ls.nvim',
-    dependencies = { 'plenary.nvim', 'nvim-lspconfig' },
-    config = function()
-      require('oxygen.core.lsp.servers.null_ls')
-    end,
-    enabled = not utils.disable_plugin('null-ls.nvim'),
-  },
+
 
   {
     'neovim/nvim-lspconfig',
     config = function()
       require('oxygen.core.lsp')
     end,
+    dependencies = {
+      {
+        'jose-elias-alvarez/null-ls.nvim',
+        dependencies = { 'plenary.nvim' },
+        config = function()
+          require('oxygen.core.lsp.servers.null_ls')
+        end,
+        enabled = not utils.disable_plugin('null-ls.nvim'),
+      },
+    },
     init = function()
       utils.lazy_load('nvim-lspconfig')
       utils.load_keymap('nvim-lspconfig')

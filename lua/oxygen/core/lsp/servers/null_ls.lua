@@ -5,7 +5,8 @@ local has_eslint_config = function(u)
   return u.root_has_file('.eslintrc') or u.root_has_file('.eslintrc.json') or u.root_has_file('.eslintrc.js')
 end
 
-local sources = {
+null_ls.setup(utils.merge({
+  sources = {
   null_ls.builtins.formatting.prettierd.with({
     env = {
       PRETTIERD_DEFAULT_CONFIG = vim.fn.getcwd() .. '/.prettierrc',
@@ -23,8 +24,5 @@ local sources = {
   null_ls.builtins.formatting.shfmt,
   null_ls.builtins.formatting.stylua,
   null_ls.builtins.formatting.black,
-}
-
-null_ls.setup(utils.merge({
-  sources = sources,
+},
 }, defaults, config.plugins.add['null-ls.nvim'] or {}))

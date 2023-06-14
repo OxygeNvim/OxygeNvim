@@ -4,25 +4,16 @@ local M = {}
 
 M.autostart = true
 
-local auto_format_lock = false
-M.on_attach = function(client, _)
-  if config.lsp.formatters[client.name] == true then
-    client.server_capabilities.document_range_formatting = true
-    client.server_capabilities.document_formatting = true
-
-    if config.lsp.format_on_save and not auto_format_lock then
-      auto_format_lock = true
-
-      vim.api.nvim_create_autocmd('BufWritePre <buf>', {
+M.on_attach = function(client, bufnr)
+  if config.lsp.format_on_save then
+    if config.lsp.formatters[client.name] == true and client.supports_method("textDocument/formatting") then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        buffer = bufnr,
         callback = function()
           vim.lsp.buf.format({ timeout_ms = 1500 })
         end,
-        nested = true,
       })
     end
-  else
-    client.server_capabilities.document_range_formatting = false
-    client.server_capabilities.document_formatting = false
   end
 end
 

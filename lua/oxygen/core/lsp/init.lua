@@ -6,7 +6,7 @@ base46.load_highlight('lsp')
 require('oxygen.core.lsp.ui')
 
 for server_name, user_opts in pairs(config.lsp.servers) do
-  local opts = defaults
+  local opts = vim.deepcopy(defaults)
 
   local ok_server, server_opts = r('oxygen.core.lsp.servers.' .. server_name)
   if ok_server then
