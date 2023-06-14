@@ -14,6 +14,7 @@ if #config.lsp.servers > 0 then
   local server_mapping = require('mason-lspconfig.mappings.server')
 
   for server_name, user_opts in pairs(config.lsp.servers) do
+    -- luacheck: no unused
     local install = user_opts.install
     if user_opts.install == nil then
       install = true

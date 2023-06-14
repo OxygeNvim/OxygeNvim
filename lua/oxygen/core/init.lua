@@ -1,8 +1,8 @@
 for _, module in pairs({
-    'editor',
-    'autocmds',
-    'keymaps',
-    'commands',
+  'editor',
+  'autocmds',
+  'keymaps',
+  'commands',
 }) do
   r('oxygen.core.' .. module)
 end

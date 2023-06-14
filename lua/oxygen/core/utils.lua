@@ -1,6 +1,6 @@
 _G.utils = {
-    logger = {},
-    keymaps = {},
+  logger = {},
+  keymaps = {},
 }
 
 local api = vim.api
@@ -87,25 +87,25 @@ end
 --- @param plugin string
 utils.lazy_load = function(plugin)
   vim.api.nvim_create_autocmd({ 'BufRead', 'BufWinEnter', 'BufNewFile' }, {
-      group = vim.api.nvim_create_augroup('BeLazyOnFileOpen' .. plugin, {}),
-      callback = function()
-        local file = vim.fn.expand('%')
-        local condition = file ~= 'NvimTree_1' and file ~= '[lazy]' and file ~= ''
+    group = vim.api.nvim_create_augroup('BeLazyOnFileOpen' .. plugin, {}),
+    callback = function()
+      local file = vim.fn.expand('%')
+      local condition = file ~= 'NvimTree_1' and file ~= '[lazy]' and file ~= ''
 
-        if condition then
-          if plugin ~= 'nvim-treesitter' then
-            vim.defer_fn(function()
-              require('lazy').load({ plugins = plugin })
-
-              if plugin == 'nvim-lspconfig' then
-                vim.cmd('silent! do FileType')
-              end
-            end, 0)
-          else
+      if condition then
+        if plugin ~= 'nvim-treesitter' then
+          vim.defer_fn(function()
             require('lazy').load({ plugins = plugin })
-          end
+
+            if plugin == 'nvim-lspconfig' then
+              vim.cmd('silent! do FileType')
+            end
+          end, 0)
+        else
+          require('lazy').load({ plugins = plugin })
         end
-      end,
+      end
+    end,
   })
 end
 
