@@ -41,3 +41,5 @@ opt.numberwidth = 2
 opt.tabstop = 2
 
 opt.shortmess:append('mnrwxcsWTI')
+
+vim.env.PATH = vim.env.PATH .. ':' .. vim.fn.stdpath('data') .. '/mason/bin'
