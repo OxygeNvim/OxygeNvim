@@ -3,12 +3,11 @@ _G.ui = {
   lsp = {},
 }
 
-local modules = {
+for _, module in pairs({
   'icons',
   'statusline',
   'lsp.rename',
-}
-for _, module in pairs(modules) do
+}) do
   require('core.ui.' .. module)
 end
 

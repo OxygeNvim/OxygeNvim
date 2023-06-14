@@ -1,5 +1,4 @@
 local opt = vim.opt
-local g = vim.g
 
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.matchpairs = { '(:)', '{:}', '[:]', '<:>' }
@@ -31,16 +30,14 @@ opt.ruler = false
 opt.wrap = false
 
 opt.timeoutlen = 250
-opt.ttimeoutlen = 10
+opt.ttimeoutlen = 100
 opt.updatetime = 100
 opt.softtabstop = 2
 opt.laststatus = 3
 opt.shiftwidth = 2
 opt.scrolloff = 8
-opt.numberwidth = 2
 opt.sidescrolloff = 8
+opt.numberwidth = 2
 opt.tabstop = 2
 
 opt.shortmess:append('csTI')
-
-g.mapleader = config.keymaps.leader

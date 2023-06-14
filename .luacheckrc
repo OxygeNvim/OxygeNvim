@@ -4,7 +4,6 @@ stds.nvim = {
   globals = {
     'vim',
     'config',
-    'colors',
     'utils',
     'r',
     'commands',
@@ -15,8 +14,6 @@ stds.nvim = {
     'vim',
   },
 }
-
-exclude_files = { 'lua/packer_compiled.lua' }
 
 std = 'lua51+nvim'
 
