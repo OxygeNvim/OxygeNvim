@@ -35,8 +35,8 @@ opt.updatetime = 100
 opt.softtabstop = 2
 opt.laststatus = 3
 opt.shiftwidth = 2
-opt.scrolloff = 8
-opt.sidescrolloff = 8
+opt.scrolloff = 2
+opt.sidescrolloff = 2
 opt.numberwidth = 2
 opt.tabstop = 2
 

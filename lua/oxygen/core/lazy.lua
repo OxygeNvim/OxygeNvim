@@ -23,4 +23,63 @@ else
 end
 
 local lazy = require('lazy')
-lazy.setup('oxygen.plugins', require('oxygen.plugins.config.lazy'))
+lazy.setup({
+  spec = {
+    { import = 'oxygen.plugins.oxygen' },
+    { import = 'oxygen.plugins' },
+    { import = 'config.plugins' },
+    string.find(utils.get_os(), 'Android') and {
+      import = 'oxygen.packs.os.android',
+    } or {},
+  },
+  defaults = {
+    lazy = true,
+    version = false,
+  },
+  ui = {
+    border = config.ui.border,
+  },
+  install = {
+    colorscheme = { 'base46' },
+  },
+  change_detection = {
+    enabled = false,
+  },
+  dev = {
+    path = '~/code/oxygen/',
+    fallback = true,
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        '2html_plugin',
+        'tohtml',
+        'getscript',
+        'getscriptPlugin',
+        'gzip',
+        'logipat',
+        'netrw',
+        'netrwPlugin',
+        'netrwSettings',
+        'netrwFileHandlers',
+        'matchit',
+        'tar',
+        'tarPlugin',
+        'rrhelper',
+        'spellfile_plugin',
+        'vimball',
+        'vimballPlugin',
+        'zip',
+        'zipPlugin',
+        'tutor',
+        'rplugin',
+        'syntax',
+        'synmenu',
+        'optwin',
+        'compiler',
+        'bugreport',
+        'ftplugin',
+      },
+    },
+  },
+})

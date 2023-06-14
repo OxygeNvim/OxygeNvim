@@ -143,6 +143,13 @@ M['move.nvim'] = {
   },
 }
 
+M['typescript'] = {
+  n = {
+    ['<leader>co'] = { ':TypescriptOrganizeImports<CR>', 'Organize Imports' },
+    ['<leader>cR'] = { ':TypescriptRenameFile<CR>', 'Rename file' },
+  },
+}
+
 if config.keymaps.custom then
   M.main = utils.merge(M.main, config.keymaps.custom)
 end
