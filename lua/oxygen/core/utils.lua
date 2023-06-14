@@ -1,6 +1,7 @@
 _G.utils = {
   logger = {},
   keymaps = {},
+  filesystem = {},
 }
 
 local api = vim.api
@@ -57,7 +58,34 @@ utils.disable_plugin = function(plugin)
   return false
 end
 
-utils.logger._log = function(type, message)
+utils.logger._log = function(type, message, write_log)
+  if write_log then
+    local file_name = vim.fn.stdpath('cache') .. '/oxygen/log'
+
+    if not utils.filesystem.check_file(file_name) then
+      utils.filesystem.create_file(file_name)
+    end
+
+    local content = utils.filesystem.get_file(file_name) .. '\n'
+
+    local time = os.date('*t')
+    time = time.hour .. ':' .. time.min .. ':' .. time.sec
+
+    local type_str
+
+    if type == vim.log.levels.INFO then
+      type_str = 'INFO'
+    elseif type == vim.log.levels.WARN then
+      type_str = 'WARNING'
+    elseif type == vim.log.levels.ERROR then
+      type_str = 'ERROR'
+    end
+
+    content = content .. '[' .. time .. '][' .. type_str .. ']: ' .. message
+
+    utils.filesystem.write_file(file_name, content)
+  end
+
   if not utils.in_headless then
     vim.notify(message, type)
   else
@@ -70,18 +98,98 @@ utils.logger._log = function(type, message)
 end
 
 --- @param message string
-utils.logger.log = function(message)
-  utils.logger._log(vim.log.levels.INFO, message)
+utils.logger.log = function(message, no_write_log)
+  utils.logger._log(vim.log.levels.INFO, message, not no_write_log)
 end
 
 --- @param message string
-utils.logger.warn = function(message)
-  utils.logger._log(vim.log.levels.WARN, message)
+utils.logger.warn = function(message, no_write_log)
+  utils.logger._log(vim.log.levels.WARN, message, not no_write_log)
 end
 
 --- @param message string
-utils.logger.error = function(message)
-  utils.logger._log(vim.log.levels.ERROR, message)
+utils.logger.error = function(message, no_write_log)
+  utils.logger._log(vim.log.levels.ERROR, message, not no_write_log)
+end
+
+--- @param file_name string
+--- @return boolean
+utils.filesystem.check_file = function(file_name)
+  return vim.loop.fs_stat(file_name)
+end
+
+--- @param dir string
+--- @return boolean
+utils.filesystem.check_dir = function(dir)
+  return vim.loop.fs_stat(dir)
+end
+
+--- @param dir string
+--- @return boolean
+utils.filesystem.create_dir = function(dir)
+  vim.fn.mkdir(dir, 'p')
+
+  return true
+end
+
+--- @param file_name string
+--- @return boolean
+utils.filesystem.create_file = function(file_name)
+  local file = io.open(file_name, 'w')
+  if file then
+    file:write('')
+    file:close()
+
+    return true
+  else
+    utils.logger.error('Error while creating ' .. file_name, true)
+
+    return false
+  end
+end
+
+--- @param file_name string
+--- @param content string
+--- @return boolean
+utils.filesystem.write_file = function(file_name, content)
+  local file = io.open(file_name, 'w')
+  if file then
+    file:write(content)
+    file:close()
+
+    return true
+  else
+    utils.logger.error('Error while creating ' .. file_name, true)
+    return false
+  end
+end
+
+--- @param file_name string
+--- @return string
+utils.filesystem.get_file = function(file_name)
+  local file = io.open(file_name, 'r')
+  if file then
+    local content = file:read('*a')
+    file:close()
+
+    return content
+  else
+    utils.logger.error('Error while reading ' .. file_name, true)
+
+    return ''
+  end
+end
+
+--- @param dir string
+utils.filesystem.get_dir_contents = function(dir)
+  return vim.fn.readdir(dir)
+end
+
+--- @param file string
+--- @return boolean
+utils.filesystem.remove_file = function(file_name)
+  vim.fn.system('rm ' .. file_name)
+  return true
 end
 
 --- @param plugin string
