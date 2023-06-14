@@ -58,7 +58,11 @@ utils.disable_plugin = function(plugin)
   return false
 end
 
-utils.logger._log = function(type, message, write_log)
+--- @param type number
+--- @param message string
+--- @param write_log boolean
+--- @param show_message boolean
+utils.logger._log = function(type, message, write_log, show_message)
   if write_log then
     local file_name = vim.fn.stdpath('cache') .. '/oxygen/log'
 
@@ -86,30 +90,38 @@ utils.logger._log = function(type, message, write_log)
     utils.filesystem.write_file(file_name, content)
   end
 
-  if not utils.in_headless then
-    vim.notify(message, type)
-  else
-    if type == vim.log.levels.ERROR then
-      error(message .. '\n')
+  if show_message then
+    if not utils.in_headless then
+      vim.notify(message, type)
     else
-      print(message .. '\n')
+      if type == vim.log.levels.ERROR then
+        error(message .. '\n')
+      else
+        print(message .. '\n')
+      end
     end
   end
 end
 
 --- @param message string
-utils.logger.log = function(message, no_write_log)
-  utils.logger._log(vim.log.levels.INFO, message, not no_write_log)
+--- @param no_write_log boolean
+--- @param no_show_message boolean
+utils.logger.log = function(message, no_write_log, no_show_message)
+  utils.logger._log(vim.log.levels.INFO, message, not no_write_log, not no_show_message)
 end
 
 --- @param message string
-utils.logger.warn = function(message, no_write_log)
+--- @param no_write_log boolean
+--- @param no_show_message boolean
+utils.logger.warn = function(message, no_write_log, no_show_message)
   utils.logger._log(vim.log.levels.WARN, message, not no_write_log)
 end
 
 --- @param message string
-utils.logger.error = function(message, no_write_log)
-  utils.logger._log(vim.log.levels.ERROR, message, not no_write_log)
+--- @param no_write_log boolean
+--- @param no_show_message boolean
+utils.logger.error = function(message, no_write_log, no_show_message)
+  utils.logger._log(vim.log.levels.ERROR, message, not no_write_log, not no_show_message)
 end
 
 --- @param file_name string

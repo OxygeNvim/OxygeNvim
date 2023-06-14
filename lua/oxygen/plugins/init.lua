@@ -13,6 +13,10 @@ local plugins = {
     dev = true,
     lazy = false,
     priority = 1000,
+    build = function()
+      require('oxygen.base46')
+      base46.compile()
+    end,
     config = function()
       require('oxygen.base46')
       base46.setup()
@@ -126,6 +130,7 @@ local plugins = {
 
   {
     'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdateSync',
     cmd = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSEnable', 'TSDisable', 'TSModuleInfo' },
     dependencies = {
       {
