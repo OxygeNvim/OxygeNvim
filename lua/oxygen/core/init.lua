@@ -4,9 +4,9 @@ for _, module in pairs({
   'keymaps',
   'commands',
 }) do
-  r('oxygen.core.' .. module)
+  require('oxygen.core.' .. module)
 end
 
-vim.cmd('filetype plugin on')
+vim.cmd('filetype on')
 
 utils.load_keymap('main')

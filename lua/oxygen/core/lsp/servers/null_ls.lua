@@ -9,9 +9,20 @@ local has_exec = function(exec)
   return vim.fn.executable(exec)
 end
 
-null_ls.setup(utils.merge({
-  sources = {
-    null_ls.builtins.formatting.clang_format,
+local sources = {}
+
+if has_exec('prettierd') then
+  table.insert(sources, {
+    null_ls.builtins.formatting.prettierd.with({
+      env = {
+        PRETTIERD_DEFAULT_CONFIG = vim.fn.getcwd() .. '/.prettierrc',
+      },
+    }),
+  })
+end
+
+if has_exec('eslint_d') then
+  table.insert(sources, {
     null_ls.builtins.code_actions.eslint_d.with({
       condition = has_eslint_config,
       prefer_local = 'node_modules/.bin',
@@ -20,28 +31,33 @@ null_ls.setup(utils.merge({
       condition = has_eslint_config,
       prefer_local = 'node_modules/.bin',
     }),
-    null_ls.builtins.formatting.prettierd.with({
-      condition = function()
-        return has_exec('prettierd')
-      end,
-      env = {
-        PRETTIERD_DEFAULT_CONFIG = vim.fn.getcwd() .. '/.prettierrc',
-      },
-    }),
-    null_ls.builtins.formatting.shfmt.with({
-      condition = function()
-        return has_exec('shfmt')
-      end,
-    }),
-    null_ls.builtins.formatting.stylua.with({
-      condition = function()
-        return has_exec('stylua')
-      end,
-    }),
-    null_ls.builtins.formatting.black.with({
-      condition = function()
-        return has_exec('black')
-      end,
-    }),
-  },
+  })
+end
+
+if has_exec('clang_format') then
+  table.insert(sources, {
+    null_ls.builtins.formatting.clang_format,
+  })
+end
+
+if has_exec('shfmt') then
+  table.insert(sources, {
+    null_ls.builtins.formatting.shfmt,
+  })
+end
+
+if has_exec('stylua') then
+  table.insert(sources, {
+    null_ls.builtins.formatting.stylua,
+  })
+end
+
+if has_exec('black') then
+  table.insert(sources, {
+    null_ls.builtins.formatting.black,
+  })
+end
+
+null_ls.setup(utils.merge({
+  sources = sources,
 }, defaults, config.lsp.null_ls or {}))

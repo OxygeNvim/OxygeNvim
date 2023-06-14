@@ -40,4 +40,4 @@ opt.sidescrolloff = 8
 opt.numberwidth = 2
 opt.tabstop = 2
 
-opt.shortmess:append('csTI')
+opt.shortmess:append('mnrwxcsWTI')

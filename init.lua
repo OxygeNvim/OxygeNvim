@@ -4,5 +4,5 @@ for _, module in pairs({
   'core.lazy',
   'core',
 }) do
-  pcall(require, 'oxygen.' .. module)
+  require('oxygen.' .. module)
 end
