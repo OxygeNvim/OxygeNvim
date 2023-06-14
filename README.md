@@ -47,7 +47,7 @@
 <summary>Bash, ZSH</summary>
 
 ```sh
-bash <(curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/cnvim) install
+bash <(curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen) install
 ```
 
 </details>
@@ -56,7 +56,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/
 <summary>Fish</summary>
 
 ```sh
-bash (curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/cnvim | psub) install
+bash (curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen | psub) install
 ```
 
 </details>
