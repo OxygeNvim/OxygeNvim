@@ -16,6 +16,16 @@
   <img alt="Issues" src="https://img.shields.io/github/issues/OxygeNvim/OxygeNvim?style=for-the-badge" />
 </p>
 
+## Showcase
+
+<div align="center">
+  <img alt="Tundra theme" src="https://github.com/OxygeNvim/OxygeNvim/raw/main/.github/images/tundra.png" />
+  <img alt="Gruvbox" src="https://github.com/OxygeNvim/OxygeNvim/raw/main/.github/images/gruvbox.png" />
+  <img alt="Gruvbox light" src="https://github.com/OxygeNvim/OxygeNvim/raw/main/.github/images/gruvbox_light.png" />
+
+  <small>Images are from [@Elagoht](https://github.com/Elagoht)</small>
+</div>
+
 ## 🎃 Features
 
 - 🌘 Fully written in lua
