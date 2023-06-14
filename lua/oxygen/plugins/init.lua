@@ -138,7 +138,6 @@ local plugins = {
     dependencies = {
       {
         'JoosepAlviste/nvim-ts-context-commentstring',
-        event = 'VeryLazy',
         enabled = not utils.disable_plugin('nvim-treesitter'),
       },
     },
@@ -232,19 +231,20 @@ local plugins = {
     enabled = config.lsp.enabled,
   },
 
+
+  {
+    'williamboman/mason.nvim',
+    cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
+    dependencies = {
   {
     'williamboman/mason-lspconfig.nvim',
-    dependencies = { 'mason.nvim' },
     cmd = { 'LspInstall', 'LspUninstall' },
     config = function()
       require('oxygen.plugins.config.mason.lsp')
     end,
     enabled = config.lsp.enabled or not utils.disable_plugin('mason.nvim'),
   },
-
-  {
-    'williamboman/mason.nvim',
-    cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
+    },
     config = function()
       require('oxygen.plugins.config.mason')
     end,
