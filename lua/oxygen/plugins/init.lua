@@ -36,13 +36,14 @@ local plugins = {
   {
     'OxygeNvim/extensions',
     dev = true,
-    lazy = false,
+    event = 'VeryLazy',
     config = function()
       require('oxygen.extensions')
       extensions.setup()
     end,
   },
 
+  { 'iamcco/async-await.lua' },
   { 'nvim-lua/plenary.nvim' },
   { 'MunifTanjim/nui.nvim' },
 
