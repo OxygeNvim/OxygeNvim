@@ -21,8 +21,6 @@ commands.sync = function()
   else
     commands.updateTsParsers()
 
-    r('oxgen.core.lsp.mason')
-
     utils.logger.warn('Please reopen neovim after everything is done!')
   end
 
