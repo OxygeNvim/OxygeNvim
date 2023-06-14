@@ -6,9 +6,7 @@ vim.diagnostic.config(utils.merge({
     source = 'always',
     border = config.ui.border,
   },
-  signs = {
-    active = true,
-  },
+  signs = true,
   virtual_text = false,
   update_in_insert = true,
   underline = true,
