@@ -1,10 +1,10 @@
 name: Tests
 
-on: push
+on: [push, pull_request]
 
 jobs:
   test-linux:
-    name: Test Linux Ubuntu - Latest
+    name: Test Ubuntu - Latest
     runs-on: ubuntu-latest
 
     steps:
@@ -19,18 +19,17 @@ jobs:
           python-version: '3.x'
 
       - name: Install OxygeNvim
-        run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen) install -y
+        run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen) install -y
 
       - name: Open neovim
         run: nvim --headless -c "OxygenSync"
 
       - name: Uninstall OxygeNvim
-        run: bash <(curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen) uninstall -y
+        run: bash <(curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen) uninstall -y
 
   test-macos:
     name: Test MacOS - Latest
     runs-on: macos-latest
-
     steps:
       - uses: actions/checkout@v3
 
@@ -43,10 +42,10 @@ jobs:
           python-version: '3.x'
 
       - name: Install OxygeNvim
-        run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen) install -y
+        run: sudo rm -rf $(which cargo) && bash <(curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen) install -y
 
       - name: Open neovim
         run: nvim --headless -c "OxygenSync"
 
       - name: Uninstall OxygeNvim
-        run: bash <(curl -fsSL https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/bin/oxygen) uninstall -y
+        run: bash <(curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen) uninstall -y
