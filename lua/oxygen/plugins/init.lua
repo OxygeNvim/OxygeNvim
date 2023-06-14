@@ -13,15 +13,9 @@ local plugins = {
     dev = true,
     lazy = false,
     priority = 1000,
-    build = function()
-      require('oxygen.base46')
-      base46.setup()
-      base46.compile()
-    end,
     config = function()
       require('oxygen.base46')
       base46.setup()
-      base46.main_highlights()
     end,
   },
 
