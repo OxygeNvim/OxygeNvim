@@ -103,7 +103,19 @@ utils.logger._log = function(type, message, write_log, show_message)
   end
 end
 
+--- @param old_text string
+--- @param new_text string
+utils.replace_word = function (old_text, new_text)
+  local config = vim.fn.stdpath('config') .. '/lua/config.lua'
+
+  local pattern = string.gsub(old_text, '-', '%%-')
+
+  local new_content = utils.filesystem.get_file(config):gsub(pattern, new_text)
+  utils.filesystem.write_file(config, new_content)
+end
+
 --- @param package_name string
+--- @return string
 utils.get_mason_path = function(package_name)
   local mason_registry = require('mason-registry')
   local package = mason_registry.get_package(package_name)
