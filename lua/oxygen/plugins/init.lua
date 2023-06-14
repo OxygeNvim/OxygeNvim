@@ -15,11 +15,13 @@ local plugins = {
     priority = 1000,
     build = function()
       require('oxygen.base46')
+      base46.setup()
       base46.compile()
     end,
     config = function()
       require('oxygen.base46')
       base46.setup()
+      base46.main_highlights()
     end,
   },
 
@@ -35,11 +37,12 @@ local plugins = {
 
   {
     'OxygeNvim/extensions',
+    event = 'VeryLazy',
     dev = true,
-    lazy = false,
     config = function()
       require('oxygen.extensions')
       extensions.setup()
+      require('oxygen.core.commands')
     end,
   },
 
@@ -151,9 +154,6 @@ local plugins = {
   {
     'lewis6991/gitsigns.nvim',
     ft = 'gitcommit',
-    config = function()
-      require('oxygen.plugins.config.other').gitsigns()
-    end,
     init = function()
       vim.api.nvim_create_autocmd({ 'BufRead' }, {
         group = vim.api.nvim_create_augroup('GitSignsLazyLoad', { clear = true }),
@@ -161,10 +161,15 @@ local plugins = {
           vim.fn.system('git -C ' .. vim.fn.expand('%:p:h') .. ' rev-parse')
           if vim.v.shell_error == 0 then
             vim.api.nvim_del_augroup_by_name('GitSignsLazyLoad')
-            utils.lazy_load('gitsigns.nvim')
+            vim.schedule(function()
+              require('lazy').load({ plugins = { 'gitsigns.nvim' } })
+            end)
           end
         end,
       })
+    end,
+    config = function()
+      require('oxygen.plugins.config.other').gitsigns()
     end,
     enabled = not utils.disable_plugin('gitsigns.nvim'),
   },
@@ -183,11 +188,9 @@ local plugins = {
 
   {
     'numToStr/Comment.nvim',
+    keys = { { 'gc', mode = { 'n', 'v' } }, { 'gb', mode = { 'n', 'v' } } },
     config = function()
       require('oxygen.plugins.config.other').comment()
-    end,
-    init = function()
-      utils.load_keymap('Comment.nvim')
     end,
     enabled = not utils.disable_plugin('Comment.nvim'),
   },
@@ -195,7 +198,7 @@ local plugins = {
   {
     'folke/todo-comments.nvim',
     event = 'VeryLazy',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'gitsigns.nvim', 'plenary.nvim' },
     config = function()
       require('oxygen.plugins.config.todo-comments')
     end,
@@ -207,38 +210,45 @@ local plugins = {
     ft = 'json',
     enabled = config.lsp.enabled,
   },
+
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    dependencies = { 'plenary.nvim', 'nvim-lspconfig' },
+    config = function()
+      require('oxygen.core.lsp.servers.null_ls')
+    end,
+    enabled = not utils.disable_plugin('null-ls.nvim'),
+  },
+
   {
     'neovim/nvim-lspconfig',
-    dependencies = {
-      {
-        'jose-elias-alvarez/null-ls.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
-          require('oxygen.core.lsp.servers.null_ls')
-        end,
-        enabled = not utils.disable_plugin('null-ls.nvim'),
-      },
-      {
-        'williamboman/mason.nvim',
-        dependencies = {
-          'williamboman/mason-lspconfig.nvim',
-        },
-        cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
-        config = function()
-          require('oxygen.plugins.config.mason')
-        end,
-        enabled = not utils.disable_plugin('mason.nvim'),
-      },
-    },
     config = function()
       require('oxygen.core.lsp')
     end,
     init = function()
       utils.lazy_load('nvim-lspconfig')
-
       utils.load_keymap('nvim-lspconfig')
     end,
     enabled = config.lsp.enabled,
+  },
+
+  {
+    'williamboman/mason-lspconfig.nvim',
+    dependencies = { 'mason.nvim' },
+    cmd = { 'LspInstall', 'LspUninstall' },
+    config = function()
+      require('oxygen.plugins.config.mason.lsp')
+    end,
+    enabled = config.lsp.enabled or not utils.disable_plugin('mason.nvim'),
+  },
+
+  {
+    'williamboman/mason.nvim',
+    cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
+    config = function()
+      require('oxygen.plugins.config.mason')
+    end,
+    enabled = not utils.disable_plugin('mason.nvim'),
   },
 
   {
@@ -249,8 +259,6 @@ local plugins = {
       require('oxygen.plugins.config.bufferline')
     end,
     init = function()
-      utils.lazy_load('bufferline.nvim')
-
       utils.load_keymap('bufferline.nvim')
     end,
     enabled = not utils.disable_plugin('bufferline.nvim'),

@@ -21,14 +21,10 @@ treesitter.setup(utils.merge({
     enable = true,
     use_languagetree = true,
   },
+  incremental_selection = { enable = true },
+  autotag = { enable = true },
+  context_commentstring = { enable = true, enable_autocmd = false },
   indent = {
     enable = true,
-  },
-  autotag = {
-    enable = true,
-  },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
   },
 }, config.plugins.config['nvim-treesitter'] or {}))

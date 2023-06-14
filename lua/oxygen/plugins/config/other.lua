@@ -113,7 +113,16 @@ M.autopairs = function()
     return false
   end
 
-  nvim_autopairs.setup()
+  nvim_autopairs.setup({
+    check_ts = true,
+    ts_config = { java = false },
+    fast_wrap = {
+      chars = { '{', '[', '(', '"', '\'', '`' },
+      offset = 0,
+      check_comma = true,
+    },
+  })
+
   cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done({ map_char = { tex = '' } }))
 end
 

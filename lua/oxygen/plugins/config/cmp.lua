@@ -56,11 +56,10 @@ cmp.setup(utils.merge({
     end,
   },
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
-    { name = 'path', keyword_length = 2 },
-    { name = 'buffer', keyword_length = 2 },
-    { name = 'vsnip', keyword_length = 2 },
+    { name = 'nvim_lsp', priority = 1000 },
+    { name = 'luasnip', keyword_length = 2, priority = 750 },
+    { name = 'buffer', keyword_length = 2, priority = 500 },
+    { name = 'path', keyword_length = 2, priority = 250 },
   }),
   experimental = {
     ghost_text = {},

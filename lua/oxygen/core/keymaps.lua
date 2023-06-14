@@ -6,18 +6,14 @@ M['main'] = {
     ['<C-g><C-w>'] = { '<C-o>vgw' },
     ['<C-J>'] = { '<C-o>J' },
   },
-
   n = {
     ['<ESC>'] = { ':noh<CR>' },
-
     ['<C-s>'] = { ':w<CR>', 'Save file' },
-
     ['<C-Up>'] = { ':resize +2<CR>' },
     ['<C-Down>'] = { ':resize -2<CR>' },
     ['<C-Left>'] = { ':vertical resize -2<CR>' },
     ['<C-Right>'] = { ':vertical resize +2<CR>' },
   },
-
   v = {
     ['p'] = { 'p:let @+=@0<CR>' },
   },
@@ -54,36 +50,6 @@ M['toggleterm.nvim'] = {
   },
 }
 
-M['Comment.nvim'] = {
-  n = {
-    ['<leader>/'] = {
-      function()
-        require('Comment.api').toggle.linewise.current()
-      end,
-      'Toggle comment',
-    },
-
-    ['gc'] = {
-      function()
-        require('Comment.api').toggle.linewise.current()
-      end,
-      'Toggle comment',
-    },
-  },
-
-  v = {
-    ['<leader>/'] = {
-      ':lua require(\'Comment.api\').toggle.linewise(vim.fn.visualmode())<CR>',
-      'Toggle comment block',
-    },
-
-    ['gcc'] = {
-      ':lua require(\'Comment.api\').toggle.linewise(vim.fn.visualmode())<CR>',
-      'Toggle comment block',
-    },
-  },
-}
-
 M['nvim-lspconfig'] = {
   n = {
     ['<leader>gD'] = {
@@ -92,63 +58,54 @@ M['nvim-lspconfig'] = {
       end,
       'LSP declaration',
     },
-
     ['<leader>gd'] = {
       function()
         vim.lsp.buf.definition()
       end,
       'LSP definition',
     },
-
     ['<leader>gi'] = {
       function()
         vim.lsp.buf.implementation()
       end,
       'LSP implementation',
     },
-
     ['<leader>gh'] = {
       function()
         vim.lsp.buf.signature_help()
       end,
       'LSP signature_help',
     },
-
     ['<leader>gt'] = {
       function()
         vim.lsp.buf.type_definition()
       end,
       'LSP definition type',
     },
-
     ['<leader>rn'] = {
       function()
         ui.lsp.rename_popup()
       end,
       'LSP rename',
     },
-
     ['<leader>ga'] = {
       function()
         vim.lsp.buf.code_action()
       end,
       'LSP code_action',
     },
-
     ['<leader>gr'] = {
       function()
         vim.lsp.buf.references()
       end,
       'LSP references',
     },
-
     ['<leader>dp'] = {
       function()
         vim.diagnostic.goto_prev()
       end,
       'Previous diagnostic',
     },
-
     ['<leader>dn'] = {
       function()
         vim.diagnostic.goto_next()
@@ -180,7 +137,6 @@ M['move.nvim'] = {
     ['<A-j>'] = { ':MoveLine(1)<CR>', 'Move current line to bottom' },
     ['<A-k>'] = { ':MoveLine(-1)<CR>', 'Move current line to top' },
   },
-
   v = {
     ['<A-j>'] = { ':MoveBlock(1)<CR>', 'Move a block to bottom' },
     ['<A-k>'] = { ':MoveBlock(-1)<CR>', 'Move a block to top' },

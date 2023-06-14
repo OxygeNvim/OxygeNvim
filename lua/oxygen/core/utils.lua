@@ -103,6 +103,13 @@ utils.logger._log = function(type, message, write_log, show_message)
   end
 end
 
+--- @param package_name string
+utils.get_mason_path = function(package_name)
+  local mason_registry = require('mason-registry')
+  local package = mason_registry.get_package(package_name)
+  return package:get_install_path()
+end
+
 --- @param message string
 --- @param no_write_log? boolean
 --- @param no_show_message? boolean
