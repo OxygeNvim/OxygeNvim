@@ -25,23 +25,23 @@
 
 - 🌘 Fully written in lua
 - 👨‍💻 Easy to install
-- 🚀 Fast (~20 - 100 ms)
+- 👶 Beginner friendly
+- 🚀 Fast (~15ms)
 - ⚙️ Format on save
 - 📚 Autocompletion
 - 💡 Uses neovim's native lsp
-- 👶 Beginner friendly
 
 ## 💾 Installation
 
 ### Requirements
 
-1. Latest Neovim
-2. Git
-3. Nerd fonts
+- Latest Neovim
+- Git
+- Nerd fonts
 
 ### How to install?
 
-##### 1. Method: Here's a script that installs everything you need:
+##### Method 1: Here's a script that installs everything you need
 
 <details open>
 <summary>Bash, ZSH</summary>
@@ -63,7 +63,7 @@ bash (curl -fsSL https://raw.githubusercontent.com/CanKolay3499/CNvim/main/bin/c
 
 > You can add `-y` flag to answer yes to all questions
 
-##### 2. Method: Git clone command that only clones the repo:
+##### Method 2: Git clone command that only clones the repo
 
 ```sh
 git clone https://github.com/OxygeNvim/OxygeNvim ~/.config/nvim
