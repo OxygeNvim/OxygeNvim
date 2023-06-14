@@ -185,7 +185,7 @@ utils.filesystem.get_dir_contents = function(dir)
   return vim.fn.readdir(dir)
 end
 
---- @param file string
+--- @param file_name string
 --- @return boolean
 utils.filesystem.remove_file = function(file_name)
   vim.fn.system('rm ' .. file_name)

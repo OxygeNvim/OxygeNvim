@@ -50,5 +50,6 @@ telescope.setup(utils.merge({
       n = { ['q'] = require('telescope.actions').close },
     },
   },
-  extensions_list = { 'theme_switcher' },
 }, config.plugins.config['telescope.nvim'] or {}))
+
+telescope.load_extension('theme_switcher')
