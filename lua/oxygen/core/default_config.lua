@@ -11,9 +11,13 @@ config.keymaps = {
 }
 
 config.ui = {
-  theme = 'rosepine',
+  theme = 'tundra',
   border = 'rounded',
   cmp_style = 'default',
+  highlights = {
+    add = {},
+    override = {},
+  },
   statusline = {
     separator_style = 'default',
   },

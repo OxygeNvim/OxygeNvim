@@ -14,28 +14,27 @@ M.keymaps = {
 }
 
 M.ui = {
-  theme = 'rosepine',
+  theme = 'tundra',
   border = 'rounded', -- rounded, single, double
   cmp_style = 'atom', -- default, atom, bordered
+  highlights = {
+    add = {},
+    override = {},
+  },
   statusline = {
-    separator_style = 'default', -- default | round | block | arrow
+    separator_style = 'round', -- default, round, block, arrow
   },
 }
 
 M.plugins = {
-  add = {
-    -- { 'foo/bar' }
-  },
-  remove = {
-    -- 'foobar.nvim'
-  },
+  add = {},
+  remove = {},
   config = {},
 }
 
 M.lsp = {
   enabled = true,
   format_on_save = true,
-  -- Default servers
   servers = {
     clangd = {
       -- use local clangd instead of installing it from mason
