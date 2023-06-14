@@ -32,13 +32,14 @@ local plugins = {
   {
     'OxygeNvim/extensions',
     dev = true,
-    lazy = false,
+    event = 'VeryLazy',
     config = function()
       require('oxygen.extensions')
       extensions.setup()
     end,
   },
 
+  { 'iamcco/async-await.lua' },
   { 'nvim-lua/plenary.nvim' },
   { 'MunifTanjim/nui.nvim' },
 
@@ -124,13 +125,15 @@ local plugins = {
     enabled = not utils.disable_plugin('indent-blankline.nvim'),
   },
 
-  { 'JoosepAlviste/nvim-ts-context-commentstring', enabled = not utils.disable_plugin('nvim-treesitter') },
-
   {
     'nvim-treesitter/nvim-treesitter',
     cmd = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSEnable', 'TSDisable', 'TSModuleInfo' },
     dependencies = {
-      { 'windwp/nvim-ts-autotag' },
+      {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        event = 'VeryLazy',
+        enabled = not utils.disable_plugin('nvim-treesitter'),
+      },
     },
     config = function()
       require('oxygen.plugins.config.treesitter')
@@ -154,9 +157,7 @@ local plugins = {
           vim.fn.system('git -C ' .. vim.fn.expand('%:p:h') .. ' rev-parse')
           if vim.v.shell_error == 0 then
             vim.api.nvim_del_augroup_by_name('GitSignsLazyLoad')
-            vim.schedule(function()
-              require('lazy').load({ plugins = 'gitsigns.nvim' })
-            end, 0)
+            utils.lazy_load('gitsigns.nvim')
           end
         end,
       })
@@ -300,6 +301,17 @@ local plugins = {
   },
 
   {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    dependencies = {
+      { 'windwp/nvim-ts-autotag' },
+    },
+    config = function()
+      require('oxygen.plugins.config.other').autopairs()
+    end,
+  },
+
+  {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
@@ -307,13 +319,6 @@ local plugins = {
       { 'hrsh7th/cmp-nvim-lua' },
       { 'hrsh7th/cmp-buffer' },
       { 'hrsh7th/cmp-path' },
-
-      {
-        'windwp/nvim-autopairs',
-        config = function()
-          require('oxygen.plugins.config.other').autopairs()
-        end,
-      },
     },
     config = function()
       require('oxygen.plugins.config.cmp')
