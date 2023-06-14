@@ -58,15 +58,6 @@ local plugins = {
   },
 
   {
-    'gpanders/editorconfig.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('oxygen.plugins.config.other').editorconfig()
-    end,
-    enabled = not utils.disable_plugin('editorconfig.nvim'),
-  },
-
-  {
     'folke/which-key.nvim',
     event = 'VeryLazy',
     config = function()

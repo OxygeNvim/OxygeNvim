@@ -106,10 +106,6 @@ M.colorizer = function()
   end, 0)
 end
 
-M.editorconfig = function()
-  r('editorconfig')
-end
-
 M.autopairs = function()
   local nvim_autopairs = require('nvim-autopairs')
   local ok_cmp, cmp = r('cmp')
