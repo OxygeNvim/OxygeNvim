@@ -1,0 +1,12 @@
+[selene]
+base = "lua51"
+name = "oxygenvim"
+
+[vim]
+any = true
+
+[config]
+any = true
+
+[table]
+any = true

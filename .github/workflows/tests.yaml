@@ -1,0 +1,15 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  selene:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: NTBBloodbath/selene-action@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --display-style=quiet lua
