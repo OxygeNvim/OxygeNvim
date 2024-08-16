@@ -13,12 +13,14 @@
 
 ## Showcase
 
-<div>
+<div align="center">
     <img alt="Tundra theme" src="https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/.github/screenshots/tundra.png" />
-    <img alt="Onedark theme" src="https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/.github/screenshots/onedark.png" />
-    <img alt="Nord theme" src="https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/.github/screenshots/nord.png" />
-    <img alt="Catppuccin latte theme" src="https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/.github/screenshots/catppuccin_latte.png" />
 </div>
+
+|||
+|-|-|
+|<img alt="Onedark theme" src="https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/.github/screenshots/onedark.png" />|<img alt="Nord theme" src="https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/.github/screenshots/nord.png" />|
+|<img alt="Catppuccin latte theme" src="https://raw.githubusercontent.com/OxygeNvim/OxygeNvim/main/.github/screenshots/catppuccin_latte.png" />||
 
 ## 🎃 Features
 
