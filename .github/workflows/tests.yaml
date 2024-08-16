@@ -12,4 +12,4 @@ jobs:
       - uses: NTBBloodbath/selene-action@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          args: --display-style=quiet lua
+          args: --display-style=quiet lua/oxygen
