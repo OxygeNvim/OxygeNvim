@@ -1,7 +1,6 @@
 return {
   {
     'OxygeNvim/base46',
-    main = 'oxygen.base46',
     dev = config.dev,
     lazy = false,
     priority = 1000,
@@ -10,7 +9,6 @@ return {
 
   {
     'OxygeNvim/ui',
-    main = 'oxygen.ui',
     dev = config.dev,
     lazy = false,
     opts = {},
@@ -18,7 +16,6 @@ return {
 
   {
     'OxygeNvim/extensions',
-    main = 'oxygen.extensions',
     dev = config.dev,
     event = { 'VeryLazy' },
     config = function()
@@ -28,5 +25,5 @@ return {
     end,
   },
 
-  { 'OxygeNvim/packs', dev = true },
+  { 'OxygeNvim/packs', dev = config.dev },
 }
