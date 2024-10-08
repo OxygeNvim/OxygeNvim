@@ -21,7 +21,7 @@ return {
 
   {
     'hrsh7th/nvim-cmp',
-    main = "cmp",
+    main = 'cmp',
     event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = {
       { 'hrsh7th/cmp-nvim-lsp' },
@@ -67,40 +67,29 @@ return {
           ['<C-n>'] = cmp.mapping.select_next_item(),
           ['<C-d>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.close(),
           ['<ESC>'] = cmp.mapping.close(),
-          ['<CR>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              if luasnip.expandable() then
-                luasnip.expand()
-              else
-                cmp.confirm({
-                  select = true,
-                })
-              end
-            else
-              fallback()
-            end
-          end),
+          ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+          }),
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              if luasnip.expandable() then
-                luasnip.expand()
-              else
-                local entry = cmp.get_selected_entry()
-                if not entry then
-                  cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                end
-
-                cmp.confirm({
-                  select = true,
-                })
-              end
+              cmp.select_next_item()
+            elseif require('luasnip').expand_or_jumpable() then
+              require('luasnip').expand_or_jump()
             else
               fallback()
             end
-          end, { 'i', 's', 'c' }),
+          end, { 'i', 's' }),
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif require('luasnip').jumpable(-1) then
+              require('luasnip').jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
         }),
         formatting = {
           fields = { 'kind', 'abbr' },
