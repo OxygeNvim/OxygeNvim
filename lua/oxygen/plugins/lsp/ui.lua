@@ -16,20 +16,16 @@ vim.diagnostic.config({
     header = { icons.debug .. ' Diagnostics: ', 'Normal' },
     border = config.ui.border,
   },
-  signs = true,
   virtual_text = false,
   update_in_insert = true,
   underline = true,
   severity_sort = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = icons.error .. " ",
+      [vim.diagnostic.severity.WARN] = icons.warn .. " ",
+      [vim.diagnostic.severity.HINT] = icons.hint .. " ",
+      [vim.diagnostic.severity.INFO] = icons.info .. " ",
+    }
+  }
 })
-
-for type, icon in pairs({
-  Error = icons.error .. ' ',
-  Warn = icons.warn .. ' ',
-  Hint = icons.hint .. ' ',
-  Info = icons.info .. ' ',
-}) do
-  local hl = 'DiagnosticSign' .. type
-
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end

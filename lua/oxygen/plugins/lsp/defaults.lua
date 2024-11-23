@@ -39,13 +39,15 @@ return {
     end
 
     if config.lsp.format_on_save then
-      vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-        group = require('oxygen.core.utils').create_augroup('FormatOnSave'),
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format({ timeout_ms = 1500 })
-        end,
-      })
+      if client.supports_method('textDocument/formatting') then
+        vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+          group = require('oxygen.core.utils').create_augroup('FormatOnSave'),
+          buffer = bufnr,
+          callback = function()
+            vim.lsp.buf.format({bufnr = bufnr})
+          end,
+        })
+      end
     end
   end,
 }

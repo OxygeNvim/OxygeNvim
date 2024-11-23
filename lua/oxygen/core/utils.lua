@@ -281,7 +281,7 @@ local log = function(level, message, write_log, show_message)
 
   if show_message then
     if not M.in_headless then
-      vim.notify(message, level, {title = "OxygeNvim"})
+      vim.notify(message, level, { title = 'OxygeNvim' })
     else
       if level == vim.log.levels.ERROR then
         error(message .. '\n')
@@ -345,7 +345,7 @@ end
 ---
 --- @return unknown
 M.create_augroup = function(name, opts)
-  return vim.api.nvim_create_augroup('OxygeNvim' .. name, opts or {})
+  return vim.api.nvim_create_augroup('OxygeNvim' .. name, opts or { clear = true })
 end
 
 return M

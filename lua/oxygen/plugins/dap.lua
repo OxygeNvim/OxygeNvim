@@ -2,8 +2,7 @@ return {
   {
     'mfussenegger/nvim-dap',
     main = 'dap',
-    event = { 'User LspConfigStart' },
-    dependencies = { { 'nvim-dap-ui' } },
+    dependencies = { { 'nvim-dap-virtual-text' }, { 'nvim-dap-ui' } },
     keys = {
       { '<leader>e', '', desc = '+Debug' },
       {
@@ -123,13 +122,31 @@ return {
       require('oxygen.base46').load_highlight('dap_ui')
 
       require('dap.ext.vscode').load_launchjs()
+
+
+      for name, sign in pairs(require("oxygen.ui.icons").dap) do
+        sign = type(sign) == "table" and sign or { sign }
+        vim.fn.sign_define(
+          "Dap" .. name,
+          { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+        )
+      end
+
+      local vscode = require("dap.ext.vscode")
+      local json = require("plenary.json")
+      vscode.json_decode = function(str)
+        return vim.json.decode(json.json_strip_comments(str))
+      end
+
+      require("overseer").enable_dap()
     end,
   },
 
   {
     'rcarriga/nvim-dap-ui',
     main = 'dapui',
-    dependencies = { { 'nvim-neotest/nvim-nio' }, { 'nvim-dap-virtual-text' } },
+    dependencies = { { 'nvim-neotest/nvim-nio' } },
+    event = { 'CmdlineEnter' },
     keys = {
       {
         '<leader>eu',

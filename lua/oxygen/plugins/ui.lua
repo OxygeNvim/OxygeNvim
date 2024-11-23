@@ -20,12 +20,15 @@ return {
     end,
   },
 
-{
-    "OXY2DEV/helpview.nvim",
-    main = "helpview",
-    ft = {"help"},
-    opts = {}
-},
+  {
+    'OXY2DEV/helpview.nvim',
+    main = 'helpview',
+    ft = { 'help' },
+    opts = {},
+  },
+
+  { 'nvzone/volt',          lazy = true },
+  { 'nvzone/menu',          lazy = true },
 
   {
     'folke/which-key.nvim',
@@ -41,14 +44,7 @@ return {
       },
     },
     opts = {
-      win = {
-        padding = { 0, 1, 1, 0 },
-        wo = {
-          border = 'none',
-          position = 'bottom',
-          winblend = 10,
-        },
-      },
+      preset = 'helix',
     },
     config = function(_, opts)
       require('oxygen.base46').load_highlight('whichkey')
@@ -90,17 +86,7 @@ return {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     event = { 'VeryLazy' },
-    opts = {
-      enabled = true,
-      indent = {
-        char = '│',
-      },
-      scope = {
-        char = '│',
-        show_start = false,
-        show_end = false,
-      },
-    },
+    opts = {},
     config = function(_, opts)
       require('oxygen.base46').load_highlight('blankline')
 
@@ -200,16 +186,12 @@ return {
       { '<leader>fo', ':ToggleTerm<CR>', desc = 'Open floating terminal' },
     },
     opts = {
-      direction = 'float',
       hide_numbers = true,
       start_in_insert = true,
       insert_mappings = true,
       terminal_mappings = true,
       close_on_exit = true,
-      float_opts = {
-        border = config.ui.border,
-        winblend = 10,
-      },
+      shade_terminals = false
     },
   },
 
@@ -294,10 +276,10 @@ return {
         },
         timeout = 3000,
         max_height = function()
-          return math.floor(vim.o.lines * 0.75)
+          return math.floor(vim.o.lines * 0.25)
         end,
         max_width = function()
-          return math.floor(vim.o.columns * 0.75)
+          return math.floor(vim.o.columns * 0.25)
         end,
         on_open = function(win)
           vim.api.nvim_win_set_config(win, { zindex = 100 })
@@ -339,7 +321,7 @@ return {
             '--column',
             '--smart-case',
           },
-          prompt_prefix = ' ' .. icons.search .. '  ',
+          prompt_prefix = '  ' .. icons.search .. '  ',
           selection_caret = '  ',
           entry_prefix = '  ',
           initial_mode = 'insert',
@@ -403,8 +385,11 @@ return {
         disable_netrw = true,
         hijack_netrw = true,
         hijack_cursor = true,
-        hijack_unnamed_buffer_when_opening = true,
         sync_root_with_cwd = true,
+        update_focused_file = {
+          enable = true,
+          update_root = false,
+        },
         hijack_directories = {
           enable = true,
           auto_open = true,
@@ -412,12 +397,14 @@ return {
         view = {
           side = 'left',
           width = 35,
+          preserve_window_proportions = true,
         },
         git = {
           enable = false,
         },
         renderer = {
           root_folder_modifier = table.concat({ ':t:gs?$?/', string.rep(' ', 1000), '?:gs?^??' }),
+          indent_markers = { enable = true },
           icons = {
             show = {
               file = true,
@@ -479,5 +466,18 @@ return {
         },
       }
     end,
+  },
+
+  {
+    'ray-x/lsp_signature.nvim',
+    main = 'lsp_signature',
+    event = { 'InsertEnter' },
+    opts = {
+      bind = true,
+      hint_enable = false,
+      handler_opts = {
+        border = config.ui.border,
+      },
+    },
   },
 }

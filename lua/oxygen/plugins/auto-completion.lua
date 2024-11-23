@@ -17,6 +17,13 @@ return {
       },
       { 'saadparwaiz1/cmp_luasnip' },
     },
+    opts = {
+      history = true,
+      updateevents = 'TextChanged,TextChangedI',
+    },
+    config = function(_, opts)
+      require('luasnip').config.set_config(opts)
+    end,
   },
 
   {
@@ -36,7 +43,9 @@ return {
 
       local icons = require('oxygen.ui.icons')
 
-      return table.merge({
+      local atom_styled = config.ui.cmp.style == 'atom' or config.ui.cmp.style == "atom_colored"
+
+      return {
         preselect = cmp.PreselectMode.Item,
         snippet = {
           expand = function(args)
@@ -53,13 +62,14 @@ return {
         },
         window = {
           documentation = {
-            border = config.ui.border,
+            border = atom_styled and "none" or config.ui.border,
             winhighlight = 'Normal:CmpDoc,FloatBorder:CmpDocBorder',
           },
           completion = {
-            border = config.ui.border,
+            border = atom_styled and "none" or config.ui.border,
             winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,FloatBorder:CmpBorder,Search:None',
             scrollbar = false,
+            side_padding = atom_styled and 0 or 1,
           },
         },
         mapping = cmp.mapping.preset.insert({
@@ -75,8 +85,8 @@ return {
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif require('luasnip').expand_or_jumpable() then
-              require('luasnip').expand_or_jump()
+            elseif luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
             else
               fallback()
             end
@@ -84,19 +94,26 @@ return {
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif require('luasnip').jumpable(-1) then
-              require('luasnip').jump(-1)
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
             else
               fallback()
             end
           end, { 'i', 's' }),
         }),
         formatting = {
-          fields = { 'kind', 'abbr' },
-          format = function(_, vim_item)
-            vim_item.kind = ' ' .. icons.kind_icons[vim_item.kind] .. ' '
+          fields = atom_styled and { 'kind', 'abbr', 'menu' } or { 'abbr', 'kind', 'menu' },
+          format = function(_, item)
+            item.abbr = item.abbr .. ' '
+            item.menu = config.ui.cmp.kind_text and item.kind or ''
+            item.menu_hl_group = atom_styled and 'LineNr' or 'CmpItemKind' .. item.kind
+            item.kind = icons.kind_icons[item.kind] .. ' '
 
-            return vim_item
+            if atom_styled then
+              item.kind = " " .. item.kind
+            end
+
+            return item
           end,
         },
         sources = {
@@ -105,18 +122,7 @@ return {
           { name = 'path',     keyword_length = 2, priority = 500 },
           { name = 'luasnip',  keyword_length = 2, priority = 250 },
         },
-      }, config.ui.cmp_style == 'atom' and {
-        window = {
-          completion = {
-            border = 'none',
-            col_offset = -3,
-            side_padding = 0,
-          },
-          documentation = {
-            border = 'none',
-          },
-        },
-      } or {})
+      }
     end,
     config = function(_, opts)
       require('oxygen.base46').load_highlight('cmp')

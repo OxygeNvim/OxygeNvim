@@ -41,6 +41,76 @@ return {
   },
 
   {
+    'stevearc/overseer.nvim',
+    main = "overseer",
+    cmd = {
+      "OverseerOpen",
+      "OverseerClose",
+      "OverseerToggle",
+      "OverseerSaveBundle",
+      "OverseerLoadBundle",
+      "OverseerDeleteBundle",
+      "OverseerRunCmd",
+      "OverseerRun",
+      "OverseerInfo",
+      "OverseerBuild",
+      "OverseerQuickAction",
+      "OverseerTaskAction",
+      "OverseerClearCache",
+    },
+    keys = {
+      { "<leader>o",  "",                         desc = "+Overseer" },
+      { "<leader>ot", ":OverseerToggle<CR>",      desc = "Task list" },
+      { "<leader>oo", ":OverseerRun<CR>",         desc = "Run task" },
+      { "<leader>oq", ":OverseerQuickAction<CR>", desc = "Action recent task" },
+      { "<leader>oi", ":OverseerInfo<CR>",        desc = "Overseer Info" },
+      { "<leader>ob", ":OverseerBuild<CR>",       desc = "Task builder" },
+      { "<leader>oa", ":OverseerTaskAction<CR>",  desc = "Task action" },
+      { "<leader>oc", ":OverseerClearCache<CR>",  desc = "Clear cache" },
+    },
+    opts = {
+      dap = false,
+      strategy = "toggleterm",
+      form = {
+        border = config.ui.border,
+        win_opts = {
+          winblend = 0,
+        },
+      },
+      confirm = {
+        border = config.ui.border,
+        win_opts = {
+          winblend = 0,
+        },
+      },
+      task_win = {
+        border = config.ui.border,
+        win_opts = {
+          winblend = 0,
+        },
+      },
+    },
+  },
+
+  {
+    'stevearc/resession.nvim',
+    main = "resession",
+    lazy = false,
+    opts = {
+      extensions = {
+        overseer = {
+        },
+      }
+    },
+    keys = {
+      { "<leader>s",  "",                                           desc = "+Session" },
+      { "<leader>ss", function() require("resession").save() end,   desc = "Save session" },
+      { "<leader>sl", function() require("resession").load() end,   desc = "Load session" },
+      { "<leader>sd", function() require("resession").delete() end, desc = "Delete session" }
+    }
+  },
+
+  {
     'ellisonleao/carbon-now.nvim',
     main = "carbon-now",
     cmd = { 'CarbonNow' },
