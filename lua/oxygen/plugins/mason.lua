@@ -1,7 +1,7 @@
 return {
   {
     'williamboman/mason.nvim',
-    main = "mason",
+    main = 'mason',
     cmd = { 'Mason', 'MasonInstall', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
     opts = function()
       local icons = require('oxygen.ui.icons')
@@ -31,7 +31,7 @@ return {
 
   {
     'williamboman/mason-lspconfig.nvim',
-    main = "mason-lspconfig",
+    main = 'mason-lspconfig',
     cmd = { 'LspInstall', 'LspUninstall' },
     opts = {
       ensure_installed = {},
@@ -40,7 +40,7 @@ return {
 
   {
     'jay-babu/mason-null-ls.nvim',
-    main = "mason-null-ls",
+    main = 'mason-null-ls',
     cmd = { 'NullLsInstall', 'NullLsUninstall' },
     opts = {
       ensure_installed = {},
@@ -49,7 +49,7 @@ return {
 
   {
     'jay-babu/mason-nvim-dap.nvim',
-    main = "mason-nvim-dap",
+    main = 'mason-nvim-dap',
     cmd = { 'DapInstall', 'DapUninstall' },
     opts = {
       ensure_installed = {},

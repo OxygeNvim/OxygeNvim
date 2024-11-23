@@ -1,9 +1,9 @@
 return {
-  { 'nvim-lua/plenary.nvim', main = "plenary" },
+  { 'nvim-lua/plenary.nvim', main = 'plenary' },
 
   {
     'famiu/bufdelete.nvim',
-    main = "bufdelete",
+    main = 'bufdelete',
     keys = {
       {
         '<leader>x',
@@ -17,7 +17,7 @@ return {
 
   {
     'numToStr/Comment.nvim',
-    main = "Comment",
+    main = 'Comment',
     keys = { { 'gc', mode = { 'v' } }, { 'gb', mode = { 'v' } }, { 'gc' } },
     dependencies = {
       { 'JoosepAlviste/nvim-ts-context-commentstring' },
@@ -35,42 +35,42 @@ return {
 
   {
     'nacro90/numb.nvim',
-    main = "numb",
+    main = 'numb',
     event = { 'CmdlineEnter' },
     opts = {},
   },
 
   {
     'stevearc/overseer.nvim',
-    main = "overseer",
+    main = 'overseer',
     cmd = {
-      "OverseerOpen",
-      "OverseerClose",
-      "OverseerToggle",
-      "OverseerSaveBundle",
-      "OverseerLoadBundle",
-      "OverseerDeleteBundle",
-      "OverseerRunCmd",
-      "OverseerRun",
-      "OverseerInfo",
-      "OverseerBuild",
-      "OverseerQuickAction",
-      "OverseerTaskAction",
-      "OverseerClearCache",
+      'OverseerOpen',
+      'OverseerClose',
+      'OverseerToggle',
+      'OverseerSaveBundle',
+      'OverseerLoadBundle',
+      'OverseerDeleteBundle',
+      'OverseerRunCmd',
+      'OverseerRun',
+      'OverseerInfo',
+      'OverseerBuild',
+      'OverseerQuickAction',
+      'OverseerTaskAction',
+      'OverseerClearCache',
     },
     keys = {
-      { "<leader>o",  "",                         desc = "+Overseer" },
-      { "<leader>ot", ":OverseerToggle<CR>",      desc = "Task list" },
-      { "<leader>oo", ":OverseerRun<CR>",         desc = "Run task" },
-      { "<leader>oq", ":OverseerQuickAction<CR>", desc = "Action recent task" },
-      { "<leader>oi", ":OverseerInfo<CR>",        desc = "Overseer Info" },
-      { "<leader>ob", ":OverseerBuild<CR>",       desc = "Task builder" },
-      { "<leader>oa", ":OverseerTaskAction<CR>",  desc = "Task action" },
-      { "<leader>oc", ":OverseerClearCache<CR>",  desc = "Clear cache" },
+      { '<leader>o', '', desc = '+Overseer' },
+      { '<leader>ot', ':OverseerToggle<CR>', desc = 'Task list' },
+      { '<leader>oo', ':OverseerRun<CR>', desc = 'Run task' },
+      { '<leader>oq', ':OverseerQuickAction<CR>', desc = 'Action recent task' },
+      { '<leader>oi', ':OverseerInfo<CR>', desc = 'Overseer Info' },
+      { '<leader>ob', ':OverseerBuild<CR>', desc = 'Task builder' },
+      { '<leader>oa', ':OverseerTaskAction<CR>', desc = 'Task action' },
+      { '<leader>oc', ':OverseerClearCache<CR>', desc = 'Clear cache' },
     },
     opts = {
       dap = false,
-      strategy = "toggleterm",
+      strategy = 'toggleterm',
       form = {
         border = config.ui.border,
         win_opts = {
@@ -94,25 +94,42 @@ return {
 
   {
     'stevearc/resession.nvim',
-    main = "resession",
+    main = 'resession',
     lazy = false,
     opts = {
       extensions = {
-        overseer = {
-        },
-      }
+        overseer = {},
+      },
     },
     keys = {
-      { "<leader>s",  "",                                           desc = "+Session" },
-      { "<leader>ss", function() require("resession").save() end,   desc = "Save session" },
-      { "<leader>sl", function() require("resession").load() end,   desc = "Load session" },
-      { "<leader>sd", function() require("resession").delete() end, desc = "Delete session" }
-    }
+      { '<leader>s', '', desc = '+Session' },
+      {
+        '<leader>ss',
+        function()
+          require('resession').save()
+        end,
+        desc = 'Save session',
+      },
+      {
+        '<leader>sl',
+        function()
+          require('resession').load()
+        end,
+        desc = 'Load session',
+      },
+      {
+        '<leader>sd',
+        function()
+          require('resession').delete()
+        end,
+        desc = 'Delete session',
+      },
+    },
   },
 
   {
     'ellisonleao/carbon-now.nvim',
-    main = "carbon-now",
+    main = 'carbon-now',
     cmd = { 'CarbonNow' },
     opts = function()
       local ui_utils = require('oxygen.ui.utils')
@@ -134,7 +151,7 @@ return {
 
   {
     'kevinhwang91/nvim-ufo',
-    main = "ufo",
+    main = 'ufo',
     event = { 'VeryLazy' },
     dependencies = { { 'kevinhwang91/promise-async' } },
     keys = {

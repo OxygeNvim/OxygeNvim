@@ -1,7 +1,7 @@
 return {
   {
     'windwp/nvim-ts-autotag',
-    main = "nvim-ts-autotag",
+    main = 'nvim-ts-autotag',
     event = { 'InsertEnter' },
     opts = {
       autotag = {
@@ -15,7 +15,7 @@ return {
 
   {
     'windwp/nvim-autopairs',
-    main = "nvim-autopairs",
+    main = 'nvim-autopairs',
     event = { 'InsertEnter' },
     opts = {
       check_ts = true,
@@ -36,17 +36,17 @@ return {
 
   {
     'fedepujol/move.nvim',
-    main = "move",
+    main = 'move',
     cmd = {
       'MoveLine',
       'MoveWord',
       'MoveBlock',
     },
     keys = {
-      { '<A-j>', ':MoveLine(1)<CR>',   desc = 'Move current line to top' },
-      { '<A-k>', ':MoveLine(-1)<CR>',  desc = 'Move current line to bottom' },
-      { '<A-j>', ':MoveBlock(1)<CR>',  mode = 'v',                          desc = 'Move selected bock to top' },
-      { '<A-k>', ':MoveBlock(-1)<CR>', mode = 'v',                          desc = 'Move selected block to bottom' },
+      { '<A-j>', ':MoveLine(1)<CR>', desc = 'Move current line to top' },
+      { '<A-k>', ':MoveLine(-1)<CR>', desc = 'Move current line to bottom' },
+      { '<A-j>', ':MoveBlock(1)<CR>', mode = 'v', desc = 'Move selected bock to top' },
+      { '<A-k>', ':MoveBlock(-1)<CR>', mode = 'v', desc = 'Move selected block to bottom' },
     },
     opts = {
       line = {

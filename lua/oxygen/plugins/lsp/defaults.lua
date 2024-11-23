@@ -44,7 +44,7 @@ return {
           group = require('oxygen.core.utils').create_augroup('FormatOnSave'),
           buffer = bufnr,
           callback = function()
-            vim.lsp.buf.format({bufnr = bufnr})
+            vim.lsp.buf.format({ bufnr = bufnr })
           end,
         })
       end

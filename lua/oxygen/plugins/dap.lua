@@ -123,22 +123,21 @@ return {
 
       require('dap.ext.vscode').load_launchjs()
 
-
-      for name, sign in pairs(require("oxygen.ui.icons").dap) do
-        sign = type(sign) == "table" and sign or { sign }
+      for name, sign in pairs(require('oxygen.ui.icons').dap) do
+        sign = type(sign) == 'table' and sign or { sign }
         vim.fn.sign_define(
-          "Dap" .. name,
-          { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+          'Dap' .. name,
+          { text = sign[1], texthl = sign[2] or 'DiagnosticInfo', linehl = sign[3], numhl = sign[3] }
         )
       end
 
-      local vscode = require("dap.ext.vscode")
-      local json = require("plenary.json")
+      local vscode = require('dap.ext.vscode')
+      local json = require('plenary.json')
       vscode.json_decode = function(str)
         return vim.json.decode(json.json_strip_comments(str))
       end
 
-      require("overseer").enable_dap()
+      require('overseer').enable_dap()
     end,
   },
 

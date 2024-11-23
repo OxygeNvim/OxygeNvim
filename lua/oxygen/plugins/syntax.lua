@@ -25,8 +25,8 @@ return {
       'TSEditQueryUserAfter',
     },
     keys = {
-      { "<c-space>", desc = "Increment Selection" },
-      { "<bs>",      desc = "Decrement Selection", mode = "x" },
+      { '<c-space>', desc = 'Increment Selection' },
+      { '<bs>', desc = 'Decrement Selection', mode = 'x' },
     },
     init = function()
       utils.lazy_load('nvim-treesitter')
@@ -34,7 +34,7 @@ return {
     opts = {
       ensure_installed = {
         'comment',
-        "regex",
+        'regex',
       },
       highlight = {
         enable = 1,
@@ -45,10 +45,10 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
+          init_selection = '<C-space>',
+          node_incremental = '<C-space>',
           scope_incremental = false,
-          node_decremental = "<bs>",
+          node_decremental = '<bs>',
         },
       },
     },

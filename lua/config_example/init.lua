@@ -2,10 +2,13 @@ local M = {}
 
 M.ui = {
   theme = 'tundra',
-  border = 'rounded',            -- none, single, double, rounded, shadow, solid
-  cmp_style = 'default',         -- default, atom
+  border = 'rounded', -- none, single, double, rounded, shadow, solid
   statusline = {
     separator_style = 'rounded', -- default, rounded, solid, arrow
+  },
+  cmp = {
+    style = 'atom_colored', -- default, atom, atom_colored
+    kind_text = true,
   },
   highlights = {
     add = {},

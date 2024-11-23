@@ -25,49 +25,49 @@ return {
         function()
           vim.lsp.buf.declaration()
         end,
-        desc = 'LSP declaration',
+        desc = 'Goto declaration',
       },
       {
         '<leader>gd',
         function()
           vim.lsp.buf.definition()
         end,
-        desc = 'LSP definition',
+        desc = 'Goto definition',
       },
       {
         '<leader>gi',
         function()
           vim.lsp.buf.implementation()
         end,
-        desc = 'LSP implementation',
+        desc = 'Goto implementation',
       },
       {
         '<leader>gh',
         function()
           vim.lsp.buf.signature_help()
         end,
-        desc = 'LSP signature_help',
+        desc = 'Signature help',
       },
       {
         '<leader>gt',
         function()
           vim.lsp.buf.type_definition()
         end,
-        desc = 'LSP definition type',
+        desc = 'Goto type definition',
       },
       {
         '<leader>ga',
         function()
           vim.lsp.buf.code_action()
         end,
-        desc = 'LSP code_action',
+        desc = 'Code action',
       },
       {
         '<leader>gr',
         function()
           vim.lsp.buf.references()
         end,
-        desc = 'LSP references',
+        desc = 'Show references',
       },
       {
         '<leader>d',
@@ -103,6 +103,13 @@ return {
           vim.lsp.buf.rename()
         end,
         desc = 'LSP rename',
+      },
+      {
+        '<leader>f',
+        function()
+          vim.lsp.buf.rename()
+        end,
+        desc = 'Format buffer',
       },
     },
     init = function()

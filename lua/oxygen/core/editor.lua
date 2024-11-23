@@ -13,7 +13,7 @@ opt.shortmess:append('mnrwxcsWTI')
 opt.listchars = { tab = '··', trail = '·', lead = '·' }
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.matchpairs = { '(:)', '{:}', '[:]', '<:>' }
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus'
 opt.inccommand = 'split'
 opt.encoding = 'utf-8'
 opt.filetype = 'unix'

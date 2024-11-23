@@ -27,8 +27,26 @@ return {
     opts = {},
   },
 
-  { 'nvzone/volt',          lazy = true },
-  { 'nvzone/menu',          lazy = true },
+  {
+    'nvzone/volt',
+    config = function()
+      require('oxygen.base46').load_highlight('volt')
+    end,
+  },
+  {
+    'nvzone/menu',
+    event = { 'VeryLazy' },
+    config = function()
+      vim.keymap.set('n', '<RightMouse>', function()
+        vim.cmd.exec('"normal! \\<RightMouse>"')
+
+        local menu = vim.bo.ft == 'NvimTree' and 'nvimtree' or 'default'
+        require('menu').open(menu, { mouse = true })
+
+        require('oxygen.base46').load_highlight('volt')
+      end, {})
+    end,
+  },
 
   {
     'folke/which-key.nvim',
@@ -67,7 +85,7 @@ return {
       'AerialInfo',
     },
     key = {
-      { '<leader>a',  '',                  desc = '+Aerial' },
+      { '<leader>a', '', desc = '+Aerial' },
       { '<leader>at', ':AerialToggle<CR>', desc = 'Toggle Aerial' },
     },
     opts = {
@@ -134,14 +152,14 @@ return {
     main = 'bufferline',
     event = { 'VeryLazy' },
     keys = {
-      { '<TAB>',      ':BufferLineCycleNext<CR>',   desc = 'Next buffer' },
-      { '<S-TAB>',    ':BufferLineCyclePrev<CR>',   desc = 'Previous buffer' },
-      { '<leader>b',  '',                           desc = '+Bufferline' },
-      { '<leader>bn', ':BufferLineCycleNext<CR>',   desc = 'Next buffer' },
-      { '<leader>bp', ':BufferLineCyclePrev<CR>',   desc = 'Previous buffer' },
+      { '<TAB>', ':BufferLineCycleNext<CR>', desc = 'Next buffer' },
+      { '<S-TAB>', ':BufferLineCyclePrev<CR>', desc = 'Previous buffer' },
+      { '<leader>b', '', desc = '+Bufferline' },
+      { '<leader>bn', ':BufferLineCycleNext<CR>', desc = 'Next buffer' },
+      { '<leader>bp', ':BufferLineCyclePrev<CR>', desc = 'Previous buffer' },
       { '<leader>bo', ':BufferLineCloseOthers<CR>', desc = 'Close other buffers' },
-      { '<leader>br', ':BufferLineCloseRight<CR>',  desc = 'Close buffers to the right' },
-      { '<leader>bl', ':BufferLineCloseLeft<CR>',   desc = 'Close buffers to the left' },
+      { '<leader>br', ':BufferLineCloseRight<CR>', desc = 'Close buffers to the right' },
+      { '<leader>bl', ':BufferLineCloseLeft<CR>', desc = 'Close buffers to the left' },
     },
     opts = function()
       local icons = require('oxygen.ui.icons')
@@ -182,7 +200,7 @@ return {
     main = 'toggleterm',
     cmd = { 'ToggleTerm' },
     keys = {
-      { '<leader>f',  '',                desc = '+ToggleTerm' },
+      { '<leader>f', '', desc = '+ToggleTerm' },
       { '<leader>fo', ':ToggleTerm<CR>', desc = 'Open floating terminal' },
     },
     opts = {
@@ -191,7 +209,7 @@ return {
       insert_mappings = true,
       terminal_mappings = true,
       close_on_exit = true,
-      shade_terminals = false
+      shade_terminals = false,
     },
   },
 
@@ -300,11 +318,11 @@ return {
     main = 'telescope',
     cmd = { 'Telescope' },
     keys = {
-      { '<leader>t',  '',                           desc = '+Telescope' },
-      { '<leader>tt', ':Telescope<CR>',             desc = 'Telescope' },
-      { '<leader>tf', ':Telescope find_files<CR>',  desc = 'Find files' },
+      { '<leader>t', '', desc = '+Telescope' },
+      { '<leader>tt', ':Telescope<CR>', desc = 'Telescope' },
+      { '<leader>tf', ':Telescope find_files<CR>', desc = 'Find files' },
       { '<leader>tc', ':Telescope git_commits<CR>', desc = 'Git commits' },
-      { '<leader>ts', ':Telescope git_status<CR>',  desc = 'Git status' },
+      { '<leader>ts', ':Telescope git_status<CR>', desc = 'Git status' },
     },
     opts = function()
       local icons = require('oxygen.ui.icons')
@@ -372,11 +390,11 @@ return {
     lazy = false,
     cmd = { 'NvimTree', 'NvimTreeToggle', 'NvimTreeFocus', 'NvimTreeClose' },
     keys = {
-      { '<C-n>',      ':NvimTreeToggle<CR>', desc = 'Toggle NvimTree' },
-      { '<C-m>',      ':NvimTreeFocus<CR>',  desc = 'Focus NvimTree' },
-      { '<leader>n',  '',                    desc = '+NvimTree' },
+      { '<C-n>', ':NvimTreeToggle<CR>', desc = 'Toggle NvimTree' },
+      { '<C-m>', ':NvimTreeFocus<CR>', desc = 'Focus NvimTree' },
+      { '<leader>n', '', desc = '+NvimTree' },
       { '<leader>nt', ':NvimTreeToggle<CR>', desc = 'Toggle NvimTree' },
-      { '<leader>nf', ':NvimTreeFocus<CR>',  desc = 'Focus NvimTree' },
+      { '<leader>nf', ':NvimTreeFocus<CR>', desc = 'Focus NvimTree' },
     },
     opts = function()
       local icons = require('oxygen.ui.icons')
@@ -435,7 +453,7 @@ return {
         setopt = true,
         segments = {
           { text = { ' ', builtin.foldfunc, ' ' }, click = 'v:lua.ScFa', condition = { false, builtin.not_empty } },
-          { text = { ' ', '%s' },                  click = 'v:lua.ScSa', condition = { false, builtin.not_empty } },
+          { text = { ' ', '%s' }, click = 'v:lua.ScSa', condition = { false, builtin.not_empty } },
 
           {
             text = { ' ', builtin.lnumfunc, ' ' },
