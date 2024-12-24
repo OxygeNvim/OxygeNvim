@@ -37,7 +37,7 @@ lazy.setup({
     opts = {},
     config = true,
     lazy = true,
-    version = false,
+    version = nil,
   },
   ui = {
     border = config.ui.border,

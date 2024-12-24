@@ -2,7 +2,6 @@ return {
   {
     'mfussenegger/nvim-dap',
     main = 'dap',
-    dependencies = { { 'nvim-dap-virtual-text' }, { 'nvim-dap-ui' } },
     keys = {
       { '<leader>e', '', desc = '+Debug' },
       {
@@ -144,7 +143,7 @@ return {
   {
     'rcarriga/nvim-dap-ui',
     main = 'dapui',
-    dependencies = { { 'nvim-neotest/nvim-nio' } },
+    dependencies = { { 'nvim-neotest/nvim-nio' }, { 'nvim-dap-virtual-text' }, { 'nvim-dap' } },
     event = { 'CmdlineEnter' },
     keys = {
       {

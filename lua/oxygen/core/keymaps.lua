@@ -5,8 +5,6 @@ local keymaps = table.merge({
 
   { '<ESC>', ':noh<CR>' },
   { '<C-s>', ':w<CR>', desc = 'Save file' },
-
-  { 'p', 'p:let @+=@-1<CR>', mode = 'v' },
 }, config.keymaps.custom or {})
 
 vim.g.mapleader = config.keymaps.leader

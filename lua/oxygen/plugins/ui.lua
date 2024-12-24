@@ -309,6 +309,7 @@ return {
 
       local notify = require('notify')
       notify.setup(opts)
+
       vim.notify = notify.notify
     end,
   },
