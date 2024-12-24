@@ -4,6 +4,7 @@ return {
     vim.lsp.protocol.make_client_capabilities(),
     require('cmp_nvim_lsp').default_capabilities(),
     {
+      offsetEncoding = { 'utf-8' },
       textDocument = {
         completion = {
           completionItem = {
@@ -42,6 +43,7 @@ return {
       if client.supports_method('textDocument/formatting') then
         vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
           group = require('oxygen.core.utils').create_augroup('FormatOnSave'),
+          buffer = bufnr,
           callback = function()
             vim.lsp.buf.format({ bufnr = bufnr })
           end,

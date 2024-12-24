@@ -61,7 +61,7 @@ bash (curl -fsSL https://github.com/OxygeNvim/installer/raw/main/oxygen | psub) 
 
 > You can add `-y` flag to answer yes to all questions
 
-<hr>
+<hr />
 
 - ##### Method 2: Git clone
 
