@@ -120,19 +120,20 @@ return {
       require('oxygen.plugins.lsp.ui')
 
       local defaults = require('oxygen.plugins.lsp.defaults')
-      local lspconfig = require('lspconfig')
-      for server, server_opts in pairs(opts.servers) do
+      for name, server_opts in pairs(opts.servers) do
         server_opts = table.merge(defaults, server_opts)
 
         server_opts.on_attach = function(client, bufnr)
           defaults.on_attach(client, bufnr)
 
-          if opts.servers[server].on_attach then
-            opts.servers[server].on_attach(client, bufnr)
+          if opts.servers[name].on_attach then
+            opts.servers[name].on_attach(client, bufnr)
           end
         end
 
-        lspconfig[server].setup(server_opts)
+        vim.lsp.config(name, server_opts)
+
+        vim.lsp.enable(name)
       end
     end,
   },

@@ -43,7 +43,7 @@ return {
 
       local icons = require('oxygen.ui.icons')
 
-      local atom_styled = config.ui.cmp.style == 'atom' or config.ui.cmp.style == 'atom_colored'
+      local atom = config.ui.cmp.style == 'atom' or config.ui.cmp.style == 'atom_colored'
 
       return {
         preselect = cmp.PreselectMode.Item,
@@ -62,14 +62,14 @@ return {
         },
         window = {
           documentation = {
-            border = atom_styled and 'none' or config.ui.border,
+            border = atom and 'none' or config.ui.border,
             winhighlight = 'Normal:CmpDoc,FloatBorder:CmpDocBorder',
           },
           completion = {
-            border = atom_styled and 'none' or config.ui.border,
+            border = atom and 'none' or config.ui.border,
             winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,FloatBorder:CmpBorder,Search:None',
             scrollbar = false,
-            side_padding = atom_styled and 0 or 1,
+            side_padding = atom and 0 or 1,
           },
         },
         mapping = cmp.mapping.preset.insert({
@@ -102,14 +102,14 @@ return {
           end, { 'i', 's' }),
         }),
         formatting = {
-          fields = atom_styled and { 'kind', 'abbr', 'menu' } or { 'abbr', 'kind', 'menu' },
+          fields = atom and { 'kind', 'abbr', 'menu' } or { 'abbr', 'kind', 'menu' },
           format = function(_, item)
             item.abbr = item.abbr .. ' '
             item.menu = config.ui.cmp.kind_text and item.kind or ''
-            item.menu_hl_group = atom_styled and 'LineNr' or 'CmpItemKind' .. item.kind
+            item.menu_hl_group = atom and 'LineNr' or 'CmpItemKind' .. item.kind
             item.kind = icons.kind_icons[item.kind] .. ' '
 
-            if atom_styled then
+            if atom then
               item.kind = ' ' .. item.kind
             end
 
@@ -118,9 +118,9 @@ return {
         },
         sources = {
           { name = 'nvim_lsp', priority = 1500 },
-          { name = 'buffer', keyword_length = 2, priority = 750 },
-          { name = 'path', keyword_length = 2, priority = 500 },
-          { name = 'luasnip', keyword_length = 2, priority = 250 },
+          { name = 'buffer',   keyword_length = 2, priority = 750 },
+          { name = 'path',     keyword_length = 2, priority = 500 },
+          { name = 'luasnip',  keyword_length = 2, priority = 250 },
         },
       }
     end,
